@@ -1,0 +1,27 @@
+
+<div class="container">
+    <h2>
+      Total Amount
+       @if(amount<0){
+        <span class="text-danger"> : {{amount}}</span> 
+       }
+       @else {
+        <span class="text-success" >  :{{amount}}</span> 
+       }
+
+    </h2> 
+    
+    <h3 *ngFor="let item of alluseramount" >
+        
+        @if(username != item.key){
+          Your Amount :
+          @if( item.value <0){
+            <span class="text-danger"> Give {{-item.value}} to {{item.key}}</span> 
+           }
+           @else {
+            <span class="text-success" > Take {{  item.value}} to {{item.key}}</span> 
+           }
+    
+        }
+     </h3>
+</div>

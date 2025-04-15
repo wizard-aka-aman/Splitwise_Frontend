@@ -1,0 +1,50 @@
+<div class="container">
+    <form [formGroup]="formvalue">
+
+        <h2 class="fw-bold mb-2 text-uppercase">Add an Expense</h2> 
+        
+        <div data-mdb-input-init class="form-outline form-white mb-4">
+            <label class="form-label" for="typeuserNameX">Description</label>
+            <input formControlName="description" type="text" id="typeuserNameX" class="form-control form-control-lg" />
+            @if(formvalue.controls['description'].errors?.['required'] && formvalue.controls['description'].touched  ){
+              <span class="text-danger">*Required</span>
+            }
+             
+        </div>
+        
+        <div data-mdb-input-init class="form-outline form-white mb-4">
+            <label class="form-label" for="typePasswordX">Amount</label>
+            <input  type="number" formControlName="amount" id="typeamountX" class="form-control form-control-lg" />
+            @if(formvalue.controls['amount'].errors?.['required'] && formvalue.controls['amount'].touched  ){
+              <span class="text-danger">*Required</span>
+            }
+            @else if (formvalue.controls['amount'].errors?.['pattern'] && formvalue.controls['amount'].touched ) {
+              <div class="text-danger">
+                Can't be Negative
+              </div>
+            } 
+        </div>
+        <label>Paid By : </label> <br>
+        <select formControlName="paidby"  name="paidby" id="">
+          @for (item of datadto; track $index) {
+            <option [defaultSelected]="item.name" value={{item.name}}>{{item.name}}</option>
+          }
+        </select>
+        @if(formvalue.controls['paidby'].errors?.['required'] && formvalue.controls['paidby'].touched  ){
+          <span class="text-danger">*Required</span>
+        }
+      </form>
+        <div class="div">
+            <div class="form-check d-flex justify-content-center fs-1 mt-3" *ngFor="let item of datadto" >
+                <label class="form-check-label" for="flexCheckDefault">
+                    <input  [(ngModel)]="item.isBelong" class="form-check-input me-3" type="checkbox" value="" id="flexCheckDefault"  >
+                    {{item.name}}
+                </label>
+            </div> 
+        </div>
+        
+        
+        <!-- <h3 class="text-center">Paid By You and Split Equally or <a class=""><div class="btn btn-dark">Customize</div></a> </h3> -->
+        <button data-mdb-button-init data-mdb-ripple-init [disabled]="formvalue.invalid" class="btn btn-primary btn-lg px-5" (click)="onSubmit()"  >Add Expense</button>
+        
+</div>

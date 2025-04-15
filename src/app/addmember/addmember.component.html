@@ -1,0 +1,10 @@
+ 
+    <div class="form-check d-flex justify-content-center fs-1 mt-3" *ngFor="let item of datadto" >
+        <label class="form-check-label" for="flexCheckDefault">
+            <input  [(ngModel)]="item.isBelong" class="form-check-input me-3" type="checkbox" value="" id="flexCheckDefault"  >
+            {{item.name}}
+        </label>
+    </div> 
+    <div class="text-center">
+        <button type="button" class="btn btn-primary mt-3 " (click)="addmember()">Add Members</button>
+    </div>  

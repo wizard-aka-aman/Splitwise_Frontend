@@ -1,0 +1,18 @@
+<div class="row mt-5">
+ 
+    
+        <div class="col-sm-5 m-3 " *ngFor="let item of data">
+            <div class="card">
+                <div class="card-body "> 
+                    <h5 class="card-title">{{item.name}}</h5>  
+
+                    <a  class="btn btn-primary ms-3"  [routerLink]="['/addmember', item.groupId]"  >Add Members</a>
+                    <a  class="btn btn-secondary ms-3"  [routerLink]="['/addexpense', item.groupId]"  >Add Expense</a>
+                    <a  class="btn btn-secondary ms-3"  [routerLink]="['/viewmember', item.groupId]"  >View Member</a>
+                    <a  class="btn btn-secondary ms-3"  [routerLink]="['/viewexpense', item.groupId , loggedInUser]"  >View Expense</a>
+            </div>
+        </div>
+          </div> 
+          
+  
+    </div>
