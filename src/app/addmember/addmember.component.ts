@@ -60,9 +60,17 @@ addmember(){
     }
   });
   console.log(filteredData);
-  this.ServiceSrv.addmember(this.groupid , filteredData).subscribe((res:any)=>{
+  this.ServiceSrv.addmember(this.groupid , filteredData).subscribe({
+    next : (res:any)=>{
     console.log(res);
-  })
+    this.toastr.success("Member Added" , "Success")  
+    this.router.navigateByUrl('/home');
+  },
+  error :(err : any)=>{
+    console.log(err);
+    this.toastr.error(err.error , "Error")  
+  }
+})
  
   
 }

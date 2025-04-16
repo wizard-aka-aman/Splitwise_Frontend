@@ -24,4 +24,26 @@
     
         }
      </h3>
+
+     
+     <div class="row row-cols-1 row-cols-md-1 ">
+      <div class="col" *ngFor="let item of allExpense">
+       @if(item.paidBy != item.paidTo){
+          <div class="card my-2" >
+            <div class="card-body">
+              <h3 class="card-title">{{item.description}}</h3>
+                  @if(item.paidBy == username){
+                    <p class="card-text fs-5   "> {{item.paidBy}} gave <b class="text-success"> ₹{{item.amount}} </b> to {{item.paidTo}}</p>
+                  }
+                  @else{
+                    <p class="card-text fs-5"> {{item.paidBy}} gave <b  class="text-danger" > ₹{{item.amount}} </b> to {{item.paidTo}}</p>
+                  } 
+              <p class="card-text right-side fs-3" style="position: absolute; right: 20px; top:30px;"> {{item.addedWhen | date :  'longDate'}} {{item.addedWhen | date :  'shortTime'}}</p>
+            </div>
+          </div>
+       }
+      </div> 
+    </div>
+
+
 </div>

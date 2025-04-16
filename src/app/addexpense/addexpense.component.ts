@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceService } from '../service/service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-addexpense',
@@ -21,7 +22,7 @@ export class AddexpenseComponent {
 datadto : any[]=[];
 
  
-constructor(private router :ActivatedRoute , private ServiceSrv :ServiceService ,private route :Router) {
+constructor(private router :ActivatedRoute , private ServiceSrv :ServiceService ,private route :Router ,private toastr: ToastrService) {
   this.router.paramMap.subscribe(param=>{
     this.groupid = Number(param.get('groupid'));
   })
@@ -59,12 +60,25 @@ onSubmit(){
   this.ServiceSrv.createexpense(this.formdata).subscribe({
    next: (res: any) => {
     console.log(res);
+    this.toastr.success("Expense Created" , "Success")  
     this.route.navigateByUrl('/home');
     
    },
    error:(err:any) =>{
     console.log(err);
+    this.toastr.error(err.error , "Error")  
+    this.ServiceSrv.getmemberofgroup(this.groupid).subscribe((res:any)=>{
+      this.datadto = res[0];
+     console.log(res[0]);
+   
+     
+   this.datadto = this.datadto.map(item => ({
+     name: item,
+     isBelong: false
+   })); 
     
+     
+   })
    }
   })
   

@@ -9,6 +9,8 @@ import { AddmemberComponent } from './addmember/addmember.component';
 import { AddexpenseComponent } from './addexpense/addexpense.component';
 import { ViewmemberComponent } from './viewmember/viewmember.component';
 import { ViewexpenseComponent } from './viewexpense/viewexpense.component';
+import { authGuard } from './auth.guard';
+import { ActivityComponent } from './activity/activity.component';
 
 export const routes: Routes = [
     
@@ -31,30 +33,41 @@ export const routes: Routes = [
         children:[
             {
                 path: 'home',
-                component : HomeComponent
+                component : HomeComponent,
+                canActivate : [authGuard]
             } ,
             {
                 path: 'creategroup',
                 // this is for lazy loading 
                 loadComponent : ()=>
-                    import('./creategroup/creategroup.component').then((c)=>c.CreategroupComponent)
+                    import('./creategroup/creategroup.component').then((c)=>c.CreategroupComponent),
+                canActivate : [authGuard]
             } ,
             {
                 path: 'addmember/:groupid',
-                component : AddmemberComponent
+                component : AddmemberComponent,
+                canActivate : [authGuard]
             } , 
             {
                 path: 'addexpense/:groupid',
-                component : AddexpenseComponent
+                component : AddexpenseComponent,
+                canActivate : [authGuard]
             } ,
             {
                 path: 'viewexpense/:groupid/:name',
-                component : ViewexpenseComponent
+                component : ViewexpenseComponent,
+                canActivate : [authGuard]
             } ,
             {
                 path: 'viewmember/:groupid',
-                component : ViewmemberComponent
+                component : ViewmemberComponent,
+                canActivate : [authGuard]
             } ,
+            {
+                path: 'activity',
+                component : ActivityComponent,
+                canActivate : [authGuard]
+            } 
         ]
     },{
         path: '**',

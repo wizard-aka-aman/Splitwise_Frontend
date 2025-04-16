@@ -52,7 +52,9 @@ export class ServiceService {
     return this.http.get(`https://localhost:7288/Expense/GetExpenseForEveryUser/${groupid}/${name}`);
    }
  
-  
+   GetDescription(groupid:number){
+    return this.http.get('https://localhost:7288/Expense/GetDescription/'+groupid);
+   }
 
 
   //functions

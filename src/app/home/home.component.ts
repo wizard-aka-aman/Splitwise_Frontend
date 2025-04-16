@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class HomeComponent {
  data : any ;
  loggedInUser : string = '';
+ 
 constructor(private ServiceSrv :ServiceService, private toastr: ToastrService , private router: Router) {
     this.ServiceSrv.getallgroup(this.ServiceSrv.getUserName()).subscribe((res:any)=>{
       console.log(res);
