@@ -56,7 +56,13 @@ export class ServiceService {
     return this.http.get('https://localhost:7288/Expense/GetDescription/'+groupid);
    }
 
-
+  GetAllActivity(name:string){
+    return this.http.get('https://localhost:7288/Expense/GetActivity/'+name);
+  }
+  
+  TotalExpense(groupid:number){
+    return this.http.get('https://localhost:7288/Expense/TotalExpense/'+groupid);
+  }
   //functions
   getUserName() {
     let token = localStorage.getItem('jwt');

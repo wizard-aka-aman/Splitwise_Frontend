@@ -6,7 +6,7 @@ import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-creategroup',
-  imports: [RouterLink,ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './creategroup.component.html',
   styleUrl: './creategroup.component.css'
 })

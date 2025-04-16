@@ -4,7 +4,7 @@
          @if(item.paidBy != item.paidTo){
             <div class="card my-2" >
               <div class="card-body">
-                <h3 class="card-title">{{item.description}}</h3>
+                <h3 class="card-title"> {{item.paidBy}} Added "{{item.description}}" in "{{item.groupName}}"</h3>
                     @if(item.paidBy == username){
                       <p class="card-text fs-5   "> {{item.paidBy}} gave <b class="text-success"> ₹{{item.amount}} </b> to {{item.paidTo}}</p>
                     }
