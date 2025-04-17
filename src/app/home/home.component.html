@@ -16,6 +16,8 @@
                     <a  class="btn btn-secondary ms-3"  [routerLink]="['/addexpense', item.groupId]"  >Add Expense</a>
                     <a  class="btn btn-secondary ms-3"  [routerLink]="['/viewmember', item.groupId]"  >View Member</a>
                     <a  class="btn btn-secondary ms-3"  [routerLink]="['/viewexpense', item.groupId , loggedInUser]"  >View Expense</a>
+
+                    <a [routerLink]="['/editgroup', item.groupId]" [queryParams]="{ name: item.name }" class="fs-4" style="position: absolute; top: 0; right: 10px;" > <i class="fas fa-edit"></i> </a>
             </div>
         </div>
           </div> 

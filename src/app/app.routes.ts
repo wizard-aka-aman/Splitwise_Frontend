@@ -11,6 +11,7 @@ import { ViewmemberComponent } from './viewmember/viewmember.component';
 import { ViewexpenseComponent } from './viewexpense/viewexpense.component';
 import { authGuard } from './auth.guard';
 import { ActivityComponent } from './activity/activity.component';
+import { EditgroupComponent } from './editgroup/editgroup.component';
 
 export const routes: Routes = [
     
@@ -66,6 +67,11 @@ export const routes: Routes = [
             {
                 path: 'activity',
                 component : ActivityComponent,
+                canActivate : [authGuard]
+            } ,
+            {
+                path: 'editgroup/:groupid',
+                component : EditgroupComponent,
                 canActivate : [authGuard]
             } 
         ]

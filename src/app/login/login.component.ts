@@ -3,9 +3,10 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { ServiceService } from '../service/service.service';
 import {   ToastrService } from 'ngx-toastr';   
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
-  imports: [RouterLink,ReactiveFormsModule],
+  imports: [RouterLink,ReactiveFormsModule , CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

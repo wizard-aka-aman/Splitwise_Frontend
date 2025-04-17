@@ -4,6 +4,7 @@
   </div>
 </div>
 
+    
 <div class="container">
     <h2>
       Total Amount of {{username}}
@@ -15,21 +16,69 @@
        }
 
     </h2> 
-    
+    <a  class=" ms-3 right-side fs-4" style="position: absolute; top: 124px; right: 240px;" >
+      
+      <button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Settle Up
+      </button>
+    </a>
+
+    <!-- --------------------------------------------------------------------------------Model -------------------------------------->
+        <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Settle Up</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <h4>Which balance do you want to settle?</h4>
+         <div class="row row-cols-1 row-cols-md-1 ">
+          <div class="col" *ngFor="let item of alluseramount">
+           @if(item.key != username){
+              <div class="card mb-1" >
+                <div class="card-body" style=" padding: 5px;">
+                  <h3 class="card-title">{{item.key}}</h3>
+                      @if(item.value >0){
+                        <p class="card-text fs-5   ">  <b class="text-success"> ₹{{item.value}} </b> </p>
+                      }
+                      @else{
+                        <p class="card-text fs-5">  <b  class="text-danger" > ₹{{item.value}} </b> </p>
+                      } 
+                      <button type="button" class="btn btn-danger right-side " style="position: absolute; right: 20px; top:30px;" >Settle !</button>
+                </div>
+              </div>
+           }
+          </div> 
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  >Custom Add Expense</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+        <!-- --------------------------------------------------------------------------------Model khtm -------------------------------------->
+
     <h3 *ngFor="let item of alluseramount" >
         
         @if(username != item.key){
-          Your Amount :
+          ●
           @if( item.value <0){
             <span class="text-danger"> Give {{-item.value}} to {{item.key}}</span> 
            }
            @else {
-            <span class="text-success" > Take {{  item.value}} to {{item.key}}</span> 
+            <span class="text-success" > Take {{  item.value}} from {{item.key}}</span> 
            }
     
         }
      </h3>
-
+    
      <h2> Total Expense :  <b class="text-primary">{{totalExpense}}</b> </h2>
      
      <div class="row row-cols-1 row-cols-md-1 ">

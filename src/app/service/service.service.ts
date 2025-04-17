@@ -64,7 +64,9 @@ export class ServiceService {
     return this.http.get('https://localhost:7288/Expense/TotalExpense/'+groupid);
   }
   
-
+  EditGroup(groupid:number , item:any){
+    return this.http.put('https://localhost:7288/Group/EditGroup/'+groupid , item);
+  }
 
   CreateExpenseByAdjustment(item: any) {
     return this.http.post('https://localhost:7288/Expense/CreateExpenseByAdjustment/', item);
