@@ -60,11 +60,20 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        
+        <div class="form-check d-flex justify-content-center fs-1 mt-3" *ngFor="let item of customdatadto" >
+          <!-- <label class="form-check-label " for="flexCheckDefault">
+              <input  [(ngModel)]="item.isBelong" name="{{item.isBelong}}" class="form-check-input me-3" type="checkbox" value="" id="flexCheckDefault"  >
+            </label> -->
+            {{item.name}}
+          <label class="form-check-label" for="flexCheckDefault">
+              <input  [(ngModel)]="item.decimal" min="0" name="{{item.decimal}}" class=" " type="number"  value=""  style="width: 150px; height: 50px;" id="flexCheckDefault"  >
+               
+          </label>
+        </div> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Add Expense</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onCustomSubmit()" >Custom Add Expense</button>
       </div>
     </div>
   </div>

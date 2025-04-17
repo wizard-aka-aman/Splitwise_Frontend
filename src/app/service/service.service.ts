@@ -63,6 +63,16 @@ export class ServiceService {
   TotalExpense(groupid:number){
     return this.http.get('https://localhost:7288/Expense/TotalExpense/'+groupid);
   }
+  
+
+
+  CreateExpenseByAdjustment(item: any) {
+    return this.http.post('https://localhost:7288/Expense/CreateExpenseByAdjustment/', item);
+  }
+
+
+
+
   //functions
   getUserName() {
     let token = localStorage.getItem('jwt');
