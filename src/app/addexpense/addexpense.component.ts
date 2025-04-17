@@ -15,6 +15,8 @@ export class AddexpenseComponent {
   formdata : any ;
   customformdata : any ;
   groupid : number = 0;
+  isAppear :boolean= false;
+
   formvalue : FormGroup = new FormGroup({
     description: new FormControl('',Validators.required),
     amount: new FormControl('',[Validators.required,Validators.pattern('^0*[1-9][0-9]*(\\.[0-9]+)?|0+\\.[0-9]*[1-9][0-9]*$')]),
@@ -30,10 +32,11 @@ constructor(private router :ActivatedRoute , private ServiceSrv :ServiceService 
     this.groupid = Number(param.get('groupid'));
   })
   console.log(this.groupid);
-
+  this.isAppear =true;
 this.ServiceSrv.getmemberofgroup(this.groupid).subscribe((res:any)=>{
    this.datadto = res[0];
    this.customdatadto = res[0];
+   this.isAppear =false;
   console.log(res[0]);
 
   
@@ -76,10 +79,11 @@ onSubmit(){
   
    console.log(this.datadto);
   console.log(this.formdata);
-
+  this.isAppear =true;
   this.ServiceSrv.createexpense(this.formdata).subscribe({
    next: (res: any) => {
     console.log(res);
+    this.isAppear =false;
     this.toastr.success("Expense Created" , "Success")  
     this.route.navigateByUrl('/home');
     

@@ -11,6 +11,7 @@ import {   ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
   
+  isAppear :boolean = false;
   formvalue : FormGroup = new FormGroup({
     userName: new FormControl('',[Validators.required]),
     password: new FormControl('',[Validators.required,Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/)]),
@@ -30,8 +31,10 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     this.formData = this.formvalue.value
     console.log(this.formData);
+    this.isAppear = true;
     this.ServiceSrv.login(this.formData).subscribe( { 
       next: (response:any) => {
+        this.isAppear = false;
         console.log('Login Successful', response);  
         this.toastr.success("Login Successfull" , "Success") 
         localStorage.setItem("jwt" , response.token)  

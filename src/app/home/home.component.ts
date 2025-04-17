@@ -13,10 +13,13 @@ import { CommonModule } from '@angular/common';
 export class HomeComponent {
  data : any ;
  loggedInUser : string = '';
- 
+ isAppear :boolean= false;
+
 constructor(private ServiceSrv :ServiceService, private toastr: ToastrService , private router: Router) {
+  this.isAppear =true;
     this.ServiceSrv.getallgroup(this.ServiceSrv.getUserName()).subscribe((res:any)=>{
       console.log(res);
+      this.isAppear =false;
       this.data = res
     })
 

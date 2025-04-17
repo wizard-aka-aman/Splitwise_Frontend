@@ -15,12 +15,16 @@ export class AddmemberComponent {
   data :string[] =[];
   datadto :any;
   groupid :number =0;
+  isAppear :boolean= false;
+
   getmemberofgroup :string[] =[];
 constructor(private ServiceSrv :ServiceService, private toastr: ToastrService , private router: Router,private route: ActivatedRoute) {
+  this.isAppear =true;
   this.ServiceSrv.getallusers().subscribe((res:any)=>{ 
     this.data = res
     this.ServiceSrv.getmemberofgroup(this.groupid).subscribe((res:any)=>{
           this.getmemberofgroup = res[0]; 
+          this.isAppear =false;
           console.log(this.getmemberofgroup);
           
 
@@ -60,9 +64,11 @@ addmember(){
     }
   });
   console.log(filteredData);
+  this.isAppear =true;
   this.ServiceSrv.addmember(this.groupid , filteredData).subscribe({
     next : (res:any)=>{
     console.log(res);
+    this.isAppear =false;
     this.toastr.success("Member Added" , "Success")  
     this.router.navigateByUrl('/home');
   },

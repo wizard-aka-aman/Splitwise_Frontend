@@ -19,6 +19,8 @@ alluseramount : any;
 username : string = '';
 allExpense :any ;
 totalExpense :number = 0;
+isAppear :boolean= false;
+
 constructor(private ServiceSrv :ServiceService, private toastr: ToastrService , private router: ActivatedRoute) {
  
   
@@ -28,7 +30,7 @@ constructor(private ServiceSrv :ServiceService, private toastr: ToastrService , 
   });
   
 this.username = this.ServiceSrv.getUserName();
-
+this.isAppear =true;
   this.ServiceSrv.GetExpenseByUser(this.groupid , this.name).subscribe((res:any)=>{
     console.log(res);
     this.amount = res;
@@ -47,6 +49,7 @@ this.username = this.ServiceSrv.getUserName();
 
   this.ServiceSrv.TotalExpense(this.groupid).subscribe((res:any)=>{
     this.totalExpense = res;
+    this.isAppear =false;
     console.log(res);
     
   })
