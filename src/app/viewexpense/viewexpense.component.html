@@ -35,24 +35,28 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-         <h4>Which balance do you want to settle?</h4>
-         <div class="row row-cols-1 row-cols-md-1 ">
-          <div class="col" *ngFor="let item of alluseramount">
-           @if(item.key != username){
+        <div class="row row-cols-1 row-cols-md-1 ">
+          <div class="col" *ngFor="let item of allsettleamount">
+            @if(item.key != username && item.value> 0){
+             <h4>Which balance do you want to settle?</h4>
               <div class="card mb-1" >
                 <div class="card-body" style=" padding: 5px;">
-                  <h3 class="card-title">{{item.key}}</h3>
-                      @if(item.value >0){
+                  <h3 class="card-title">{{item.key}}</h3>  
                         <p class="card-text fs-5   ">  <b class="text-success"> ₹{{item.value}} </b> </p>
-                      }
-                      @else{
-                        <p class="card-text fs-5">  <b  class="text-danger" > ₹{{item.value}} </b> </p>
-                      } 
-                      <button type="button" class="btn btn-danger right-side " style="position: absolute; right: 20px; top:30px;" >Settle !</button>
+                      
+                        {{item.name}}
+                        <label class="form-check-label" for="flexCheckDefault">
+                            <input  min="0" [(ngModel)]="item.value" max="{{item.value}}" name="{{item.decimal}}" class=" " type="number"  value=""  style="width: 150px; height: 50px;" id="flexCheckDefault"  >
+                             
+                        </label>
+                      <button type="button" class="btn btn-danger right-side " data-bs-dismiss="modal" (click)="settle(item.key , item.value)" style="position: absolute; right: 20px; top:30px;" >Settle !</button>
                 </div>
               </div>
-           }
-          </div> 
+              
+              
+            }
+           
+          </div>  
         </div>
 
       </div>

@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
       },
       error: (error:any) => {
         this.toastr.error(error.error , "Error")
+        this.isAppear = false;
         console.log(error.error); // "Invalid Credentials!!"
       }
     })

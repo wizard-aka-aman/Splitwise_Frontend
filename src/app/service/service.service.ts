@@ -67,14 +67,21 @@ export class ServiceService {
   EditGroup(groupid:number , item:any){
     return this.http.put('https://localhost:7288/Group/EditGroup/'+groupid , item);
   }
-
+  
   CreateExpenseByAdjustment(item: any) {
     return this.http.post('https://localhost:7288/Expense/CreateExpenseByAdjustment/', item);
   }
-
-
-
-
+  
+  CreateSettle(item: any) {
+    return this.http.post('https://localhost:7288/Settle/CreateSettle/', item);
+  }
+  
+  DeleteGroup(groupid:number,name:string){
+    return this.http.delete('https://localhost:7288/Group/DeleteGroup/'+groupid+'/'+name);
+  }
+  
+  
+  
   //functions
   getUserName() {
     let token = localStorage.getItem('jwt');

@@ -18,6 +18,7 @@
                     <a  class="btn btn-secondary ms-3"  [routerLink]="['/viewexpense', item.groupId , loggedInUser]"  >View Expense</a>
 
                     <a [routerLink]="['/editgroup', item.groupId]" [queryParams]="{ name: item.name }" class="fs-4" style="position: absolute; top: 0; right: 10px;" > <i class="fas fa-edit"></i> </a>
+                    <a  (click)="deletegroup(item.groupId)" class="fs-4" style="position: absolute; bottom: 0; right: 10px;" > <i class="fa-solid fa-trash"></i> </a>
             </div>
         </div>
           </div> 

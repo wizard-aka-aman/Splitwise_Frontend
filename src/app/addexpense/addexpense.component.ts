@@ -133,7 +133,7 @@ onCustomSubmit(){
     },
     error:(err:any) =>{
      console.log(err);
-     this.toastr.error(err.error , "Error")  
+     this.toastr.error("Fill Full form" , "Error")  
      this.ServiceSrv.getmemberofgroup(this.groupid).subscribe((res:any)=>{
        this.datadto = res[0];
       console.log(res[0]);

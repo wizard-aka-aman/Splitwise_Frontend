@@ -3,10 +3,11 @@ import { ServiceService } from '../service/service.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
+import { FormControl, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-viewexpense',
-  imports: [CommonModule ,DatePipe ],
+  imports: [CommonModule ,DatePipe , FormsModule ],
   templateUrl: './viewexpense.component.html',
   styleUrl: './viewexpense.component.css'
 })
@@ -16,11 +17,17 @@ groupid :number = 0;
 amount : number = 0;
 name : string = '';
 alluseramount : any;
+allsettleamount : any;
 username : string = '';
 allExpense :any ;
 totalExpense :number = 0;
 isAppear :boolean= false;
 
+settlevalue :number = 0 ;
+
+createsettle : any = {
+    
+}
 constructor(private ServiceSrv :ServiceService, private toastr: ToastrService , private router: ActivatedRoute) {
  
   
@@ -39,6 +46,7 @@ this.isAppear =true;
   this.ServiceSrv.GetExpenseForEveryUser(this.groupid , this.name).subscribe((res:any)=>{
     console.log(res);
     this.alluseramount = res;
+    this.allsettleamount = res;
   })
 
   this.ServiceSrv.GetDescription(this.groupid).subscribe((res:any)=>{
@@ -52,6 +60,57 @@ this.isAppear =true;
     this.isAppear =false;
     console.log(res);
     
+  })
+  
+}
+
+
+ReCall(){
+  
+  this.router.paramMap.subscribe(params => {
+    this.groupid = Number(params.get('groupid'));
+    this.name = params.get('name')!; 
+  });
+  
+this.username = this.ServiceSrv.getUserName();
+this.isAppear =true;
+  this.ServiceSrv.GetExpenseByUser(this.groupid , this.name).subscribe((res:any)=>{
+    console.log(res);
+    this.amount = res;
+  })
+  
+  this.ServiceSrv.GetExpenseForEveryUser(this.groupid , this.name).subscribe((res:any)=>{
+    console.log(res);
+    this.alluseramount = res;
+    this.allsettleamount = res;
+  })
+
+  this.ServiceSrv.GetDescription(this.groupid).subscribe((res:any)=>{
+    this.allExpense = res;
+    console.log(res);
+    
+  })
+
+  this.ServiceSrv.TotalExpense(this.groupid).subscribe((res:any)=>{
+    this.totalExpense = res;
+    this.isAppear =false;
+    console.log(res);
+    
+  })
+}
+
+settle(name : string , value : number){
+   
+  this.createsettle.GroupId = this.groupid;
+  this.createsettle.PaidTo   = name;
+  this.createsettle.PaidBy = this.ServiceSrv.getUserName();
+  this.createsettle.Amount = value;
+  console.log(this.createsettle);
+   
+  this.ServiceSrv.CreateSettle(this.createsettle).subscribe((res:any)=>{
+    this.toastr.success("Settle up with "+name , "Success");
+    this.ReCall();
+    console.log(res);
   })
 }
 }
