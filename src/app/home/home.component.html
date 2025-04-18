@@ -12,13 +12,14 @@
                 <div class="card-body "> 
                     <h5 class="card-title">{{item.name}}</h5>  
 
-                    <a  class="btn btn-primary ms-3"  [routerLink]="['/addmember', item.groupId]"  >Add Members</a>
-                    <a  class="btn btn-secondary ms-3"  [routerLink]="['/addexpense', item.groupId]"  >Add Expense</a>
-                    <a  class="btn btn-secondary ms-3"  [routerLink]="['/viewmember', item.groupId]"  >View Member</a>
-                    <a  class="btn btn-secondary ms-3"  [routerLink]="['/viewexpense', item.groupId , loggedInUser]"  >View Expense</a>
+                    <a  class="btn btn-primary m-2"  [routerLink]="['/addmember', item.groupId]"  >Add Members</a>
+                    <a  class="btn btn-secondary m-2"  [routerLink]="['/addexpense', item.groupId]"  >Add Expense</a>
+                    <a  class="btn btn-secondary m-2"  [routerLink]="['/viewmember', item.groupId]"  >View Member</a>
+                    <a  class="btn btn-secondary m-2"  [routerLink]="['/viewexpense', item.groupId , loggedInUser]"  >View Expense</a>
+                    <a  class="btn btn-success m-2"  [routerLink]="['/chats']" [queryParams]="{ groupid: item.groupId }"  >Chat</a>
 
                     <a [routerLink]="['/editgroup', item.groupId]" [queryParams]="{ name: item.name }" class="fs-4" style="position: absolute; top: 0; right: 10px;" > <i class="fas fa-edit"></i> </a>
-                    <a  (click)="deletegroup(item.groupId)" class="fs-4" style="position: absolute; bottom: 0; right: 10px;" > <i class="fa-solid fa-trash"></i> </a>
+                    <a   (click)="deletegroup(item.groupId)" class="fs-4  " style="cursor :pointer; color: red; position: absolute; bottom: 0; right: 10px;" > <i class="fa-solid fa-trash"></i> </a>
             </div>
         </div>
           </div> 

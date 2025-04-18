@@ -12,6 +12,7 @@ import { ViewexpenseComponent } from './viewexpense/viewexpense.component';
 import { authGuard } from './auth.guard';
 import { ActivityComponent } from './activity/activity.component';
 import { EditgroupComponent } from './editgroup/editgroup.component';
+import { ChatComponent } from './chat/chat.component';
 
 export const routes: Routes = [
     
@@ -72,6 +73,11 @@ export const routes: Routes = [
             {
                 path: 'editgroup/:groupid',
                 component : EditgroupComponent,
+                canActivate : [authGuard]
+            } ,
+            {
+                path: 'chats',
+                component : ChatComponent,
                 canActivate : [authGuard]
             } 
         ]

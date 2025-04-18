@@ -42,9 +42,10 @@ this.isAppear =true;
     console.log(res);
     this.amount = res;
   })
-  
+  this.isAppear =true;
   this.ServiceSrv.GetExpenseForEveryUser(this.groupid , this.name).subscribe((res:any)=>{
     console.log(res);
+    this.isAppear =false;
     this.alluseramount = res;
     this.allsettleamount = res;
   })
