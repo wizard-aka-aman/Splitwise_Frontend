@@ -79,8 +79,12 @@ export class ServiceService {
   DeleteGroup(groupid:number,name:string){
     return this.http.delete('https://localhost:7288/Group/DeleteGroup/'+groupid+'/'+name);
   }
+
+  GetGroup(groupid:number){
+    return this.http.get('https://localhost:7288/Group/GetGroupById/'+groupid);
+  }
   
-  
+   
   
   //functions
   getUserName() {

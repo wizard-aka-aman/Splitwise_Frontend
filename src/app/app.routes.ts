@@ -13,6 +13,8 @@ import { authGuard } from './auth.guard';
 import { ActivityComponent } from './activity/activity.component';
 import { EditgroupComponent } from './editgroup/editgroup.component';
 import { ChatComponent } from './chat/chat.component';
+import { PersonalchatComponent } from './personalchat/personalchat.component';
+import { PeruserchatComponent } from './peruserchat/peruserchat.component';
 
 export const routes: Routes = [
     
@@ -78,6 +80,16 @@ export const routes: Routes = [
             {
                 path: 'chats',
                 component : ChatComponent,
+                canActivate : [authGuard]
+            } ,
+            {
+                path: 'personalchat/:groupname',
+                component : PeruserchatComponent,
+                canActivate : [authGuard]
+            }  ,
+            {
+                path: 'personalchat',
+                component : PersonalchatComponent,
                 canActivate : [authGuard]
             } 
         ]

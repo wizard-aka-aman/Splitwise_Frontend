@@ -4,8 +4,12 @@
     </div>
   </div>
 
- <div class="container">
-    <h1 class="text-center" *ngFor="let item of data">
-        {{item}}
-    </h1>
- </div>
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div *ngFor="let item of data; let i = index" class="item-card fade-in my-4 p-4 shadow-sm rounded">
+          <h1 class="text-center text-dark fw-bold">{{ item }}</h1>
+        </div>
+      </div>
+    </div>
+  </div>

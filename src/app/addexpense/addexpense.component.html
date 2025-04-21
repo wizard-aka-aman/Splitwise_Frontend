@@ -41,7 +41,7 @@
         }
       </form>
         <div class="div   ">
-            <div class="form-check d-flex justify-content-center fs-1 mt-3" *ngFor="let item of datadto" >
+            <div class="form-check d-flex  fs-1 mt-3" *ngFor="let item of datadto" >
                 <label class="form-check-label" for="flexCheckDefault">
                     <input  [(ngModel)]="item.isBelong" class="form-check-input me-3" type="checkbox" value="" id="flexCheckDefault"  >
                     {{item.name}}
@@ -66,13 +66,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="form-check d-flex justify-content-center fs-1 mt-3" *ngFor="let item of customdatadto" >
+        <div class="form-check d-flex mb-2" *ngFor="let item of customdatadto" >
           <!-- <label class="form-check-label " for="flexCheckDefault">
               <input  [(ngModel)]="item.isBelong" name="{{item.isBelong}}" class="form-check-input me-3" type="checkbox" value="" id="flexCheckDefault"  >
             </label> -->
-            {{item.name}}
-          <label class="form-check-label" for="flexCheckDefault">
-              <input  [(ngModel)]="item.decimal" min="0" name="{{item.decimal}}" class=" " type="number"  value=""  style="width: 150px; height: 50px;" id="flexCheckDefault"  >
+            
+            <div class="" style="   font-size: 20px; font-weight: bold;">
+              {{item.name}}
+
+            </div>
+          <label class="form-check-label ps-3" for="flexCheckDefault">
+              <input  [(ngModel)]="item.decimal" min="0" name="{{item.decimal}}" class="ModelInput " type="number"  value=""  style="width: 250px; height: 40px;" id="flexCheckDefault"  >
                
           </label>
         </div> 

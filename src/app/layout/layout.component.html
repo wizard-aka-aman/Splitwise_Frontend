@@ -1,5 +1,5 @@
  
-<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary">
+<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" >
     <div class="container-fluid">
       <a class="navbar-brand fs-1" routerLink="home"  >SplitWise</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,8 +16,11 @@
           <li class="nav-item">
             <a class="nav-link fs-3" routerLink="activity" >Activity</a>
           </li> <li class="nav-item">
-            <a class="nav-link fs-3"  routerLink="chats" [queryParams]="{groupid : 0}" >Chats</a>
+            <a class="nav-link fs-3"  routerLink="chats" [queryParams]="{groupid : 0}" >Global-Chat</a>
           </li>
+         <li class="nav-item">
+          <a class="nav-link fs-3"  routerLink="personalchat"  >Personal-Chat</a>
+        </li>
         </ul>
         <span class="navbar-text"> 
             <h3 class="me-3">Wellcome, {{userName}}!</h3>

@@ -46,7 +46,7 @@
                       
                         {{item.name}}
                         <label class="form-check-label" for="flexCheckDefault">
-                            <input  min="0" [(ngModel)]="item.value" max="{{item.value}}" name="{{item.decimal}}" class=" " type="number"  value=""  style="width: 150px; height: 50px;" id="flexCheckDefault"  >
+                            <input  min="10" [(ngModel)]="item.value"  max="{{item.value}}" name="{{item.decimal}}" class=" " type="number"  value=""  style="width: 150px; height: 50px;" id="flexCheckDefault"  >
                              
                         </label>
                       <button type="button" class="btn btn-danger right-side " data-bs-dismiss="modal" (click)="settle(item.key , item.value)" style="position: absolute; right: 20px; top:30px;" >Settle !</button>

@@ -48,7 +48,11 @@ constructor(private ServiceSrv :ServiceService, private toastr: ToastrService , 
       error: (error:any) => {
         console.log(error);
         this.recall();
-        this.toastr.error(error.error , "Error")
+        if(error.error.text == "Group Delete Successfully!"){
+          this.toastr.success("Group Deleted Successfully" , "Success") 
+        }else{
+          this.toastr.error(error.error , "Error")
+        }
       }
     })
    }
