@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, SimpleChanges, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ChatService } from '../chat.service';
 import { ServiceService } from '../service/service.service';
@@ -41,6 +41,10 @@ export class PeruserchatComponent {
      
     this.chatService.startConnection(this.user, (groupName, message) => {
       this.messages.push({ sender: groupName, message ,sentAt : Date() });
+      setTimeout(() => {
+        const el = this.chatContainer.nativeElement;
+      el.scrollTop = el.scrollHeight;
+      }, 10);
       console.log( { sender: groupName, message ,sentAt : Date() } );
       
     }).then(() => {
@@ -56,6 +60,8 @@ export class PeruserchatComponent {
     // console.log("user name is:", this.user);
     
   } 
+  
+   
 
   send() {
     const DateTime  = new Date();
