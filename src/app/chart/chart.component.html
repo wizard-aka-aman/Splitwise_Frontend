@@ -1,0 +1,12 @@
+<h1 class="text-center"> {{groupName}} -  Chart</h1>
+<div class="simple-bar-chart " >
+  
+ 
+    <div class="item" style="--clr: #5EB344; --val: {{data.value/TotalExpense*100}}" *ngFor="let data of Data">
+        <div class="label fs-3" >{{data.key}} <br> ₹{{data.value}}</div>
+        <div class="value fw-bold fs-5" >{{data.value/TotalExpense*100  | number :'1.0-0'}}%</div>
+        
+      </div>
+   
+   
+</div>

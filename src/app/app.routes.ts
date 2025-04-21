@@ -15,6 +15,7 @@ import { EditgroupComponent } from './editgroup/editgroup.component';
 import { ChatComponent } from './chat/chat.component';
 import { PersonalchatComponent } from './personalchat/personalchat.component';
 import { PeruserchatComponent } from './peruserchat/peruserchat.component';
+import { ChartComponent } from './chart/chart.component';
 
 export const routes: Routes = [
     
@@ -90,6 +91,12 @@ export const routes: Routes = [
             {
                 path: 'personalchat',
                 component : PersonalchatComponent,
+                canActivate : [authGuard]
+            } 
+            ,
+            {
+                path: 'chart/:groupid',
+                component : ChartComponent,
                 canActivate : [authGuard]
             } 
         ]

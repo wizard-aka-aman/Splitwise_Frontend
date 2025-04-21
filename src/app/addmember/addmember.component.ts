@@ -18,6 +18,8 @@ export class AddmemberComponent {
   isAppear :boolean= false;
 
   getmemberofgroup :string[] =[];
+  forCheck :any[] = [];
+  IsContinueAddMember :boolean = true;
 constructor(private ServiceSrv :ServiceService, private toastr: ToastrService , private router: Router,private route: ActivatedRoute) {
   this.isAppear =true;
   this.ServiceSrv.getallusers().subscribe((res:any)=>{ 
@@ -63,20 +65,66 @@ addmember(){
       filteredData.push(x.name);
     }
   });
+  const UnfilteredData:string[] = [];
+  this.datadto.forEach((x:any) => {
+    if(!x.isBelong){
+      UnfilteredData.push(x.name);
+    }
+  });
   console.log(filteredData);
-  this.isAppear =true;
-  this.ServiceSrv.addmember(this.groupid , filteredData).subscribe({
-    next : (res:any)=>{
-    console.log(res);
-    this.isAppear =false;
-    this.toastr.success("Member Added" , "Success")  
-    this.router.navigateByUrl('/home');
-  },
-  error :(err : any)=>{
-    console.log(err);
-    this.toastr.error(err.error , "Error")  
-  }
-})
+  console.log(UnfilteredData);
+  this.getmemberofgroup.forEach(elem => {
+    if (UnfilteredData.includes(elem)) {
+      this.forCheck.push(elem);
+      
+    }
+  });
+  console.log(this.forCheck);
+    this.forCheck.forEach(((elem:string)=>{
+      this.ServiceSrv.GetExpenseByUser(this.groupid,elem).subscribe((res:any)=>{
+      console.log(res);
+      
+        if(res!=0){
+        this.IsContinueAddMember = false;
+        }
+        if(this.IsContinueAddMember){
+    
+          this.isAppear =true;
+          this.ServiceSrv.addmember(this.groupid , filteredData).subscribe({
+            next : (res:any)=>{
+            console.log(res);
+            this.isAppear =false;
+            this.toastr.success("Member Added" , "Success")  
+            this.router.navigateByUrl('/home');
+          },
+          error :(err : any)=>{
+            console.log(err);
+            this.toastr.error(err.error , "Error")  
+          }
+        })
+          }else{
+            this.toastr.error("Clear all the Expense of Remove Member" ,"Error");
+            this.router.navigateByUrl('/home');
+          }
+      })
+    })) 
+    if(this.forCheck.length == 0){
+      this.isAppear =true;
+      this.ServiceSrv.addmember(this.groupid , filteredData).subscribe({
+        next : (res:any)=>{
+        console.log(res);
+        this.isAppear =false;
+        this.toastr.success("Member Added" , "Success")  
+        this.router.navigateByUrl('/home');
+      },
+      error :(err : any)=>{
+        console.log(err);
+        this.toastr.error(err.error , "Error")  
+      }
+    })
+    }
+  
+  
  
   
 }

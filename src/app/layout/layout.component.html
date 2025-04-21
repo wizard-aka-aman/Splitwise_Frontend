@@ -20,11 +20,49 @@
           </li>
          <li class="nav-item">
           <a class="nav-link fs-3"  routerLink="personalchat"  >Personal-Chat</a>
-        </li>
+        </li> 
         </ul>
-        <span class="navbar-text"> 
+        <!-- <span class="navbar-text" > 
             <h3 class="me-3">Wellcome, {{userName}}!</h3>
-        </span>
+        </span> -->
+        
+      <button type="button" class="btn btn-outline-success   fs-5 me-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Wellcome, {{userName}}!
+      </button>
+
+
+<!-- --------------------------------------------------------------------------------Model -------------------------------------->
+        <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Total Spent</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row row-cols-1 row-cols-md-1 ">
+          <h4>Total Amount Of Money You Spent In These Groups!</h4>
+          <hr> 
+          <div class="col" *ngFor="let item of Data"> 
+                <h3 class="">{{item.key}} <span class="text-muted fs-3"> →</span> ₹ {{item.value}}</h3>
+          </div>  
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  >Custom Add Expense</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+        <!-- --------------------------------------------------------------------------------Model khtm -------------------------------------->
+
+
+
         <span class="navbar-text"> 
             <a class="nav-link fs-4 " style="cursor: pointer;"  (click)="onLogout()" > 
               <i class="fa-solid fa-right-from-bracket"></i>Logout</a> 
@@ -32,5 +70,9 @@
       </div>
     </div>
   </nav>
+
+
+
+  
 <router-outlet></router-outlet>
  

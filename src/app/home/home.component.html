@@ -17,6 +17,7 @@
                     <a  class="btn btn-secondary m-2"  [routerLink]="['/viewmember', item.groupId]"  >View Member</a>
                     <a  class="btn btn-secondary m-2"  [routerLink]="['/viewexpense', item.groupId , loggedInUser]"  >View Expense</a>
                     <a  class="btn btn-success m-2"  [routerLink]="['/chats']" [queryParams]="{ groupid: item.groupId }"  >Chat</a>
+                    <a  class="btn btn-warning m-2"   [routerLink]="['/chart', item.groupId]"   >Chart</a>
 
                     <a [routerLink]="['/editgroup', item.groupId]" [queryParams]="{ name: item.name }" class="fs-4" style="position: absolute; top: 0; right: 10px;" > <i class="fas fa-edit"></i> </a>
                     <a   (click)="deletegroup(item.groupId)" class="fs-4  " style="cursor :pointer; color: red; position: absolute; bottom: 0; right: 10px;" > <i class="fa-solid fa-trash"></i> </a>

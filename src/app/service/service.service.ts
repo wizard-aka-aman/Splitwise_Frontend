@@ -84,7 +84,13 @@ export class ServiceService {
     return this.http.get('https://localhost:7288/Group/GetGroupById/'+groupid);
   }
   
-   
+  TotalExpenseForEveryUserForPerticularGroup(groupid:number){
+    return this.http.get('https://localhost:7288/Expense/TotalExpenseForEveryUser/'+groupid);
+  }
+  
+  TotalExpenseOfLoggedInUser(name:number){
+    return this.http.get('https://localhost:7288/Expense/TotalExpenseOfLoggedInUser/'+name);
+  }
   
   //functions
   getUserName() {
