@@ -4,10 +4,11 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormControl, FormsModule } from '@angular/forms';
+import { FilterPipe } from '../pipe/filter.pipe';
 
 @Component({
   selector: 'app-viewexpense',
-  imports: [CommonModule ,DatePipe , FormsModule ],
+  imports: [CommonModule ,DatePipe , FormsModule ,FilterPipe ],
   templateUrl: './viewexpense.component.html',
   styleUrl: './viewexpense.component.css'
 })
@@ -25,9 +26,10 @@ isAppear :boolean= false;
 
 settlevalue :number = 0 ;
 
-createsettle : any = {
-    
-}
+createsettle : any = {};
+
+search : string ='';
+datadto :any;
 constructor(private ServiceSrv :ServiceService, private toastr: ToastrService , private router: ActivatedRoute) {
  
   
@@ -62,7 +64,10 @@ this.isAppear =true;
     console.log(res);
     
   })
-  
+  this.ServiceSrv.getmemberofgroup(this.groupid).subscribe((res:any)=>{
+    console.log(res);
+    this.datadto = res[0];
+  })
 }
 
 

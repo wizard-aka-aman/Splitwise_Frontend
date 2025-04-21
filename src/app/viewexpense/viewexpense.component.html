@@ -89,9 +89,16 @@
      </h3>
     
      <h2> Total Expense :  <b class="text-primary">{{totalExpense}}</b> </h2>
-     
+     <br>
+     <h3 class="text-center">Select Filter Based On PaidBy</h3>
+     <span class=" m-3 d-flex justify-content-center align-items-center">
+      <div class="input-group d-flex justify-content-center align-items-center">
+          <span class="input-group-text d-flex justify-content-center align-items-center">Search</span>
+          <input type="text" class="form-control" [(ngModel)]="search" name="search" placeholder="Search..." aria-label="Search">
+      </div>
+  </span>
      <div class="row row-cols-1 row-cols-md-1 ">
-      <div class="col" *ngFor="let item of allExpense">
+      <div class="col" *ngFor="let item of allExpense | filter:search">
        @if(item.paidBy != item.paidTo){
           <div class="card my-2" >
             <div class="card-body">

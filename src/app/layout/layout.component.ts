@@ -14,14 +14,22 @@ export class LayoutComponent {
   title = 'Angular-Pad'; 
   userName :any;
   Data:any = 0;
+  Total :number = 0;
   constructor(private ServiceSrv : ServiceService , private router : Router){
     this.userName = this.ServiceSrv.getUserName();
 
     this.ServiceSrv.TotalExpenseOfLoggedInUser(this.userName).subscribe((res:any)=>{
       this.Data = res;
       console.log(res);
+      for (let index = 0; index < this.Data.length; index++) {
       
+        this.Total += this.Data[index].value;
+        
+      }
+      console.log(this.Total);
     })
+    
+    
   }
 
   onLogout(){

@@ -25,11 +25,7 @@ export class PeruserchatComponent {
     this.router.paramMap.subscribe(params => {
       this.groupName = String(params.get('groupname'));
        
-    });
-    setTimeout(() => {
-      const el = this.chatContainer.nativeElement;
-    el.scrollTop = el.scrollHeight;
-    }, 500);
+    }); 
     console.log( "groupname : "+this.groupName);
     console.log("user : "+this.user);
     
@@ -40,7 +36,7 @@ export class PeruserchatComponent {
   ngOnInit(): void {
      
     this.chatService.startConnection(this.user, (groupName, message) => {
-      this.messages.push({ sender: groupName, message ,sentAt : Date() });
+      this.messages.push({ groupName : this.user ,sender: groupName, message ,sentAt : Date() });
       setTimeout(() => {
         const el = this.chatContainer.nativeElement;
       el.scrollTop = el.scrollHeight;
@@ -51,9 +47,13 @@ export class PeruserchatComponent {
       this.isAppear =true;
       this.chatService.PersonalChat(this.groupName ,this.user).subscribe((msgs: any) => {
         this.isAppear =false;
+        
         this.messages = msgs;
         console.log(msgs);
-        
+        setTimeout(() => {
+          const el = this.chatContainer.nativeElement;
+        el.scrollTop = el.scrollHeight;
+        }, 500);
         
       });
     });

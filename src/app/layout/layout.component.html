@@ -26,7 +26,7 @@
             <h3 class="me-3">Wellcome, {{userName}}!</h3>
         </span> -->
         
-      <button type="button" class="btn btn-outline-success   fs-5 me-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      <button type="button" class="btn btn-outline-success   fs-5 me-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
         Wellcome, {{userName}}!
       </button>
 
@@ -35,7 +35,7 @@
         <!-- Button trigger modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -49,6 +49,7 @@
           <div class="col" *ngFor="let item of Data"> 
                 <h3 class="">{{item.key}} <span class="text-muted fs-3"> →</span> ₹ {{item.value}}</h3>
           </div>  
+          <h2 class=""> Total : {{Total}}</h2>
         </div>
 
       </div>
