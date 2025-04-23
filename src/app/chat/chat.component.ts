@@ -47,17 +47,23 @@ export class ChatComponent implements OnInit {
   
   ngOnInit(): void {
      
-    this.chatService.startConnection(this.groupName, (user, message) => {
+    this.chatService.startConnection(this.groupName, (user, messageGroup, message) => {
       this.messages.push({ sender: user, message ,sentAt : Date() });
       console.log( { sender: user, message ,sentAt : Date() } );
-      
+      setTimeout(() => {
+        const el = this.chatContainer.nativeElement;
+      el.scrollTop = el.scrollHeight;
+      }, 10);
     }).then(() => {
       this.isAppear =true;
       this.chatService.getMessages(this.groupName).subscribe((msgs: any) => {
         this.isAppear =false;
         this.messages = msgs;
         console.log(msgs);
-        
+        setTimeout(() => {
+          const el = this.chatContainer.nativeElement;
+        el.scrollTop = el.scrollHeight;
+        }, 500);
         
       });
     });
@@ -71,6 +77,9 @@ export class ChatComponent implements OnInit {
     
     if (this.message.trim()) {
       this.chatService.sendMessage(this.groupName, this.user, this.message ,DateTime.toLocaleString());
+
+
+
       this.message = ''; 
       
     } 

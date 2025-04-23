@@ -39,7 +39,18 @@
         @if(formvalue.controls['paidby'].errors?.['required'] && formvalue.controls['paidby'].touched  ){
           <span class="text-danger">*Required</span>
         }
+    
+         
+        <label>    Image </label> <br>
+        <!-- <input formControlName="Image" type="file" name="Image" id="typeuserNameX" class="form-control form-control-lg" /> -->
+
+
+        <!-- chatgpt -->
+        <input type="file" (change)="onFileSelected($event)" class="form-control form-control-lg" />
+
       </form>
+      <!-- <label for="">Image</label>
+      <input type="file" name="formdata1" [(ngModel)]="formdata1"  (change)="onFileSelected($event)" id=""> -->
         <div class="div   ">
             <div class="form-check d-flex  fs-1 mt-3" *ngFor="let item of datadto" >
                 <label class="form-check-label" for="flexCheckDefault">

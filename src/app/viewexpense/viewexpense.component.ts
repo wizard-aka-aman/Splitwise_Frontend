@@ -119,4 +119,14 @@ settle(name : string , value : number){
     console.log(res);
   })
 }
+
+
+selectedImage: string = '';
+
+zoomImage(base64Image: string): void {
+  this.selectedImage = 'data:image/png;base64,' + base64Image;
+}
+
+
+
 }

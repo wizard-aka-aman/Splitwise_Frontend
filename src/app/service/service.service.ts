@@ -40,7 +40,7 @@ export class ServiceService {
     return this.http.get('https://localhost:7288/Group/GetMemberofGroup/' + groupid);
   }
 
-  createexpense(item: any) {
+  createexpense(item: FormData) {
     return this.http.post('https://localhost:7288/Expense/createexpense/', item);
   }
 
@@ -92,6 +92,19 @@ export class ServiceService {
     return this.http.get('https://localhost:7288/Expense/TotalExpenseOfLoggedInUser/'+name);
   }
   
+  // image(item:any,expenseid:number){
+  //   return this.http.put('https://localhost:7288/Expense/image/'+expenseid , item);
+  // }
+  
+// chat gpt ka h
+  image(formData: any, id: number) {
+    const uploadData = new FormData();
+    uploadData.append('filecollection', formData.Image); // match with parameter name in controller
+    return this.http.put('https://localhost:7288/Expense/image/'+id, uploadData);
+  }
+  
+
+
   //functions
   getUserName() {
     let token = localStorage.getItem('jwt');

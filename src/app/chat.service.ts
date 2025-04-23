@@ -12,7 +12,7 @@ export class ChatService {
 
   constructor(private http: HttpClient) {}
 
-  public async startConnection(groupName: string, onReceive: (user: string, message: string) => void): Promise<void> {
+  public async startConnection(groupName: string, onReceive: ( sender :string,user: string, message: string) => void): Promise<void> {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(`${this.baseUrl}/chatHub`,{
         withCredentials: true
@@ -20,7 +20,13 @@ export class ChatService {
       .withAutomaticReconnect()
       .build();
   
-    this.hubConnection.on("ReceiveMessage", onReceive);
+    // this.hubConnection.on("ReceiveMessage", onReceive);
+    this.hubConnection.on("ReceiveMessage", (sender: string, groupName: string, message: string) => {
+      onReceive(sender, groupName, message);
+    });
+    
+    
+    
   
     try {
       await this.hubConnection.start();

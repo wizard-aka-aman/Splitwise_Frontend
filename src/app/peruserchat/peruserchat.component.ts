@@ -35,14 +35,15 @@ export class PeruserchatComponent {
   
   ngOnInit(): void {
      
-    this.chatService.startConnection(this.user, (groupName, message) => {
-      this.messages.push({ groupName : this.user ,sender: groupName, message ,sentAt : Date() });
+    this.chatService.startConnection(this.user, (sender, messageGroup, message) =>  {
+      if (messageGroup === this.groupName) {
+        this.messages.push({ groupName: messageGroup, sender, message, sentAt: Date() });
       setTimeout(() => {
         const el = this.chatContainer.nativeElement;
       el.scrollTop = el.scrollHeight;
-      }, 10);
-      console.log( { sender: groupName, message ,sentAt : Date() } );
-      
+      }, 10); 
+      console.log({ groupName: messageGroup, sender, message, sentAt: Date() });
+    }
     }).then(() => {
       this.isAppear =true;
       this.chatService.PersonalChat(this.groupName ,this.user).subscribe((msgs: any) => {
@@ -60,6 +61,33 @@ export class PeruserchatComponent {
     // console.log("user name is:", this.user);
     
   } 
+  // ngOnInit(): void {
+     
+  //   this.chatService.startConnection(this.user, (groupName , message) => {
+  //     this.messages.push({ groupName : this.groupName ,sender: groupName, message ,sentAt : Date() });
+  //     setTimeout(() => {
+  //       const el = this.chatContainer.nativeElement;
+  //     el.scrollTop = el.scrollHeight;
+  //     }, 10); 
+  //     console.log(  {groupName : this.groupName ,sender: groupName, message ,sentAt : Date() }  );
+      
+  //   }).then(() => {
+  //     this.isAppear =true;
+  //     this.chatService.PersonalChat(this.groupName ,this.user).subscribe((msgs: any) => {
+  //       this.isAppear =false;
+        
+  //       this.messages = msgs;
+  //       console.log(msgs);
+  //       setTimeout(() => {
+  //         const el = this.chatContainer.nativeElement;
+  //       el.scrollTop = el.scrollHeight;
+  //       }, 500);
+        
+  //     });
+  //   });
+  //   // console.log("user name is:", this.user);
+    
+  // } 
   
    
 
@@ -69,9 +97,18 @@ export class PeruserchatComponent {
     
     if (this.message.trim()) {
       this.chatService.sendMessage(this.user, this.groupName, this.message ,DateTime.toLocaleString());
+    
+       // Show message locally for sender
+       this.messages.push({
+        groupName: this.user,
+        sender: this.groupName,
+        message: this.message,
+        sentAt: DateTime.toLocaleString()
+      });
       this.message = ''; 
       
     } 
+    
     setTimeout(() => {
       const el = this.chatContainer.nativeElement;
     el.scrollTop = el.scrollHeight;

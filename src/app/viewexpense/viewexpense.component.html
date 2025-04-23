@@ -6,6 +6,7 @@
 
     
 <div class="container">
+  
     <h2>
       Total Amount of {{username}}
        @if(amount<0){
@@ -101,7 +102,16 @@
       <div class="col" *ngFor="let item of allExpense | filter:search">
        @if(item.paidBy != item.paidTo){
           <div class="card my-2" >
-            <div class="card-body">
+            <div class="card-body"> 
+              <img 
+              style="width: 100px; height: 100px; cursor: pointer;" 
+              [src]="'data:image/png;base64,' + item.image" 
+              alt="{{item.description}}"
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal" 
+              (click)="zoomImage(item.image)">
+            
+
               <h3 class="card-title">{{item.description}}</h3>
                   @if(item.paidBy == username){
                     <p class="card-text fs-5   "> {{item.paidBy}} gave <b class="text-success"> ₹{{item.amount}} </b> to {{item.paidTo}}</p>
@@ -113,8 +123,31 @@
             </div>
           </div>
        }
+ 
       </div> 
     </div>
 
 
 </div>
+
+
+
+<!-- _________________________ -->
+ <!-- Image Zoom Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Image Preview</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img [src]="selectedImage" class="img-fluid" style="width: 400px; height: 400px;" alt="Zoomed Image">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+ 
