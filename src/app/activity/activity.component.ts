@@ -15,12 +15,25 @@ export class ActivityComponent {
   allActivity : any ;
   isAppear :boolean= false;
   search : string ='';
-  start :number = 1;
+  start :number = 0;
   end : number = 10;
   constructor(private ServiceSrv :ServiceService) {
     this.username = this.ServiceSrv.getUserName();
     this.isAppear =true;
-    this.ServiceSrv.GetAllActivity(this.username).subscribe((res:any)=>{
+    this.ServiceSrv.GetAllActivity(this.username,this.start,this.end).subscribe((res:any)=>{
+      this.allActivity = res ;
+      this.isAppear =false;
+      this.allActivity.sort((a:any, b:any) => new Date(b.addedWhen).getTime() - new Date(a.addedWhen).getTime());
+      console.log(res);
+
+
+    })
+   }
+
+   recall(){
+    this.isAppear =true;
+    this.allActivity =[];
+    this.ServiceSrv.GetAllActivity(this.username,this.start,this.end).subscribe((res:any)=>{
       this.allActivity = res ;
       this.isAppear =false;
       this.allActivity.sort((a:any, b:any) => new Date(b.addedWhen).getTime() - new Date(a.addedWhen).getTime());
@@ -30,10 +43,16 @@ export class ActivityComponent {
     })
    }
    previous(){
-
+    if (this.start > 0) {
+      this.start -= 10;
+    this.end -= 10; 
+    this.recall() 
+    }
    }
-   next(){
-    
+   next(){ 
+      this.start += 10;
+    this.end += 10;   
+    this.recall() 
    }
    
 }

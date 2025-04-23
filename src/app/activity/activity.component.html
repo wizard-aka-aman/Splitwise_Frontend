@@ -12,9 +12,9 @@
           <input type="text" class="form-control" [(ngModel)]="search" name="search" placeholder="Search..." aria-label="Search">
       </div>
      </span>
-     <div class="row  d-flex justify-content-center"   >
-      <div class=" btn btn-secondary col-6 w-auto  mx-5" (click)="previous()" >Previous</div>
-      <div class="col-6 btn btn-secondary w-auto mx-5" (click)="next()"  >Next</div>
+     <div class="row  d-flex justify-content-around"   >
+      <div class=" btn btn-secondary col-6 w-auto  " (click)="previous()" >Previous</div>
+      <div class="col-6 btn btn-secondary w-auto  " (click)="next()"  >Next</div>
     </div>
     <div class="row row-cols-1 row-cols-md-1 ">
         <div class="col" *ngFor="let item of allActivity | filter:search">

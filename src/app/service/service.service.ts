@@ -58,8 +58,8 @@ export class ServiceService {
     return this.http.get(`${this.BaseUrl}/Expense/GetDescription/`+groupid);
    }
 
-  GetAllActivity(name:string){
-    return this.http.get(`${this.BaseUrl}/Expense/GetActivity/`+name);
+  GetAllActivity(name:string,start:number,end:number){
+    return this.http.get(`${this.BaseUrl}/Expense/GetActivity/${name}/${start}/${end}`);
   }
   
   TotalExpense(groupid:number){
