@@ -13,94 +13,95 @@ export class ServiceService {
 
   }
 
+   public BaseUrl :string= 'https://wizardaman.bsite.net';
   //api's
 
   login(item: any) {
-    return this.http.post('https://localhost:7288/login', item);
+    return this.http.post(`${this.BaseUrl}/login`, item);
   }
   register(item: any) {
-    return this.http.post('https://localhost:7288/register', item);
+    return this.http.post(`${this.BaseUrl}/register`, item);
   }
   logout() {
-    return this.http.get('https://localhost:7288/logout');
+    return this.http.get(`${this.BaseUrl}/logout`);
   }
   creategroup(item: any) {
-    return this.http.post('https://localhost:7288/Group/creategroup', item);
+    return this.http.post(`${this.BaseUrl}/Group/creategroup`, item);
   }
   getallgroup(name: string) {
-    return this.http.get('https://localhost:7288/Group/getallgroup/' + name);
+    return this.http.get(`${this.BaseUrl}/Group/getallgroup/` + name);
   }
   getallusers() {
-    return this.http.get('https://localhost:7288/getallusers');
+    return this.http.get(`${this.BaseUrl}/getallusers`);
   }
   addmember(groupid: number, item: any) {
-    return this.http.post('https://localhost:7288/Group/addmember/' + groupid, item);
+    return this.http.post(`${this.BaseUrl}/Group/addmember/` + groupid, item);
   }
   getmemberofgroup(groupid: number) {
-    return this.http.get('https://localhost:7288/Group/GetMemberofGroup/' + groupid);
+    return this.http.get(`${this.BaseUrl}/Group/GetMemberofGroup/` + groupid);
   }
 
   createexpense(item: FormData) {
-    return this.http.post('https://localhost:7288/Expense/createexpense/', item);
+    return this.http.post(`${this.BaseUrl}/Expense/createexpense/`, item);
   }
 
   GetExpenseByUser(groupid:number,name:string){
-    return this.http.get(`https://localhost:7288/Expense/GetExpenseByUser/${groupid}/${name}`);
+    return this.http.get(`${this.BaseUrl}/Expense/GetExpenseByUser/${groupid}/${name}`);
    }
 
    GetExpenseForEveryUser(groupid:number,name:string){
-    return this.http.get(`https://localhost:7288/Expense/GetExpenseForEveryUser/${groupid}/${name}`);
+    return this.http.get(`${this.BaseUrl}/Expense/GetExpenseForEveryUser/${groupid}/${name}`);
    }
  
    GetDescription(groupid:number){
-    return this.http.get('https://localhost:7288/Expense/GetDescription/'+groupid);
+    return this.http.get(`${this.BaseUrl}/Expense/GetDescription/`+groupid);
    }
 
   GetAllActivity(name:string){
-    return this.http.get('https://localhost:7288/Expense/GetActivity/'+name);
+    return this.http.get(`${this.BaseUrl}/Expense/GetActivity/`+name);
   }
   
   TotalExpense(groupid:number){
-    return this.http.get('https://localhost:7288/Expense/TotalExpense/'+groupid);
+    return this.http.get(`${this.BaseUrl}/Expense/TotalExpense/`+groupid);
   }
   
   EditGroup(groupid:number , item:any){
-    return this.http.put('https://localhost:7288/Group/EditGroup/'+groupid , item);
+    return this.http.put(`${this.BaseUrl}/Group/EditGroup/`+groupid , item);
   }
   
   CreateExpenseByAdjustment(item: any) {
-    return this.http.post('https://localhost:7288/Expense/CreateExpenseByAdjustment/', item);
+    return this.http.post(`${this.BaseUrl}/Expense/CreateExpenseByAdjustment/`, item);
   }
   
   CreateSettle(item: any) {
-    return this.http.post('https://localhost:7288/Settle/CreateSettle/', item);
+    return this.http.post(`${this.BaseUrl}/Settle/CreateSettle/`, item);
   }
   
   DeleteGroup(groupid:number,name:string){
-    return this.http.delete('https://localhost:7288/Group/DeleteGroup/'+groupid+'/'+name);
+    return this.http.delete(`${this.BaseUrl}/Group/DeleteGroup/`+groupid+'/'+name);
   }
 
   GetGroup(groupid:number){
-    return this.http.get('https://localhost:7288/Group/GetGroupById/'+groupid);
+    return this.http.get(`${this.BaseUrl}/Group/GetGroupById/`+groupid);
   }
   
   TotalExpenseForEveryUserForPerticularGroup(groupid:number){
-    return this.http.get('https://localhost:7288/Expense/TotalExpenseForEveryUser/'+groupid);
+    return this.http.get(`${this.BaseUrl}/Expense/TotalExpenseForEveryUser/`+groupid);
   }
   
   TotalExpenseOfLoggedInUser(name:number){
-    return this.http.get('https://localhost:7288/Expense/TotalExpenseOfLoggedInUser/'+name);
+    return this.http.get(`${this.BaseUrl}/Expense/TotalExpenseOfLoggedInUser/`+name);
   }
   
   // image(item:any,expenseid:number){
-  //   return this.http.put('https://localhost:7288/Expense/image/'+expenseid , item);
+    // return this.http.put(`${this.BaseUrl}/Expense/image/`+expenseid , item);
   // }
   
 // chat gpt ka h
   image(formData: any, id: number) {
     const uploadData = new FormData();
     uploadData.append('filecollection', formData.Image); // match with parameter name in controller
-    return this.http.put('https://localhost:7288/Expense/image/'+id, uploadData);
+    return this.http.put(`${this.BaseUrl}/Expense/image/`+id, uploadData);
   }
   
 
