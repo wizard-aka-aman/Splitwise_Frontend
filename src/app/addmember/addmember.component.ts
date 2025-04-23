@@ -87,14 +87,14 @@ addmember(){
         if(res!=0){
         this.IsContinueAddMember = false;
         }
-        if(this.IsContinueAddMember){
+        if(this.IsContinueAddMember && filteredData.length >0){
     
           this.isAppear =true;
           this.ServiceSrv.addmember(this.groupid , filteredData).subscribe({
             next : (res:any)=>{
             console.log(res);
             this.isAppear =false;
-            this.toastr.success("Member Added" , "Success")  
+            this.toastr.warning("Member Remove" , "Success")  
             this.router.navigateByUrl('/home');
           },
           error :(err : any)=>{
@@ -103,8 +103,13 @@ addmember(){
           }
         })
           }else{
-            this.toastr.error("Clear all the Expense of Remove Member" ,"Error");
+            if(filteredData.length ==0){
+              this.toastr.error("Atleast one member should present or delete group" ,"Error");
+            }else{
+              this.toastr.error("Clear all the Expense of Remove Member" ,"Error");
+            }
             this.router.navigateByUrl('/home');
+             
           }
       })
     })) 

@@ -6,12 +6,16 @@
 <div class="container">
   <br>
      <h3 class="text-center">Select Filter Based On PaidBy</h3>
-     <span class=" m-3 d-flex justify-content-center align-items-center">
+     <span class="  my-2 d-flex justify-content-center align-items-center">
       <div class="input-group d-flex justify-content-center align-items-center">
           <span class="input-group-text d-flex justify-content-center align-items-center">Search</span>
           <input type="text" class="form-control" [(ngModel)]="search" name="search" placeholder="Search..." aria-label="Search">
       </div>
      </span>
+     <div class="row  d-flex justify-content-center"   >
+      <div class=" btn btn-secondary col-6 w-auto  mx-5" (click)="previous()" >Previous</div>
+      <div class="col-6 btn btn-secondary w-auto mx-5" (click)="next()"  >Next</div>
+    </div>
     <div class="row row-cols-1 row-cols-md-1 ">
         <div class="col" *ngFor="let item of allActivity | filter:search">
          @if(item.paidBy != item.paidTo){
@@ -31,4 +35,6 @@
          }
         </div> 
       </div>
+     
+</div>
  

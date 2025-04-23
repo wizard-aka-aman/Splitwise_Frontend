@@ -8,7 +8,8 @@ import { DatePipe } from '@angular/common';
 })
 export class ChatService {
   private hubConnection!: signalR.HubConnection;
-  private baseUrl = 'https://wizardaman.bsite.net'; // Change as needed
+  // private baseUrl = 'https://wizardaman.bsite.net'; // online server as needed
+  private baseUrl = 'https://localhost:7288'; // local server as needed
 
   constructor(private http: HttpClient) {}
 

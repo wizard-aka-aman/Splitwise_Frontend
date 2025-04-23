@@ -15,6 +15,8 @@ export class ActivityComponent {
   allActivity : any ;
   isAppear :boolean= false;
   search : string ='';
+  start :number = 1;
+  end : number = 10;
   constructor(private ServiceSrv :ServiceService) {
     this.username = this.ServiceSrv.getUserName();
     this.isAppear =true;
@@ -26,6 +28,12 @@ export class ActivityComponent {
 
 
     })
+   }
+   previous(){
+
+   }
+   next(){
+    
    }
    
 }

@@ -46,7 +46,8 @@ export class ChatComponent implements OnInit {
   
   
   ngOnInit(): void {
-     
+    
+    this.isAppear =true;
     this.chatService.startConnection(this.groupName, (user, messageGroup, message) => {
       this.messages.push({ sender: user, message ,sentAt : Date() });
       console.log( { sender: user, message ,sentAt : Date() } );
@@ -55,7 +56,6 @@ export class ChatComponent implements OnInit {
       el.scrollTop = el.scrollHeight;
       }, 10);
     }).then(() => {
-      this.isAppear =true;
       this.chatService.getMessages(this.groupName).subscribe((msgs: any) => {
         this.isAppear =false;
         this.messages = msgs;

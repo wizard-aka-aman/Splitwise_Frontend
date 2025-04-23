@@ -50,53 +50,73 @@ export const routes: Routes = [
             } ,
             {
                 path: 'addmember/:groupid',
-                component : AddmemberComponent,
+                // component : AddmemberComponent,
+                loadComponent : ()=>
+                    import('./addmember/addmember.component').then((c)=>c.AddmemberComponent),
                 canActivate : [authGuard]
             } , 
             {
                 path: 'addexpense/:groupid',
-                component : AddexpenseComponent,
+                // component : AddexpenseComponent,
+                loadComponent : ()=>
+                import('./addexpense/addexpense.component').then((c)=>c.AddexpenseComponent),
                 canActivate : [authGuard]
             } ,
             {
                 path: 'viewexpense/:groupid/:name',
-                component : ViewexpenseComponent,
+                // component : ViewexpenseComponent,
+                 loadComponent : ()=>
+                    import('./viewexpense/viewexpense.component').then((c)=>c.ViewexpenseComponent),
                 canActivate : [authGuard]
             } ,
             {
                 path: 'viewmember/:groupid',
-                component : ViewmemberComponent,
+                // component : ViewmemberComponent,
+                 loadComponent : ()=>
+                    import('./viewmember/viewmember.component').then((c)=>c.ViewmemberComponent),
                 canActivate : [authGuard]
             } ,
             {
                 path: 'activity',
-                component : ActivityComponent,
+                // component : ActivityComponent,
+                 loadComponent : ()=>
+                    import('./activity/activity.component').then((c)=>c.ActivityComponent),
                 canActivate : [authGuard]
             } ,
             {
                 path: 'editgroup/:groupid',
-                component : EditgroupComponent,
+                // component : EditgroupComponent,
+                 loadComponent : ()=>
+                    import('./editgroup/editgroup.component').then((c)=>c.EditgroupComponent),
                 canActivate : [authGuard]
             } ,
             {
                 path: 'chats',
-                component : ChatComponent,
+                // component : ChatComponent,
+                 loadComponent : ()=>
+                    import('./chat/chat.component').then((c)=>c.ChatComponent),
                 canActivate : [authGuard]
             } ,
             {
                 path: 'personalchat/:groupname',
-                component : PeruserchatComponent,
+                // component : PeruserchatComponent,
+                 loadComponent : ()=>
+                    import('./peruserchat/peruserchat.component').then((c)=>c.PeruserchatComponent),
                 canActivate : [authGuard]
             }  ,
             {
                 path: 'personalchat',
-                component : PersonalchatComponent,
+                // component : PersonalchatComponent,
+                 loadComponent : ()=>
+                    import('./personalchat/personalchat.component').then((c)=>c.PersonalchatComponent),
                 canActivate : [authGuard]
             } 
             ,
             {
                 path: 'chart/:groupid',
-                component : ChartComponent,
+                // component : ChartComponent,
+                 loadComponent : ()=>
+                    import('./chart/chart.component').then((c)=>c.ChartComponent),
                 canActivate : [authGuard]
             } 
         ]

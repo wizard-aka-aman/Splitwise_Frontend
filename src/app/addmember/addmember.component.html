@@ -1,15 +1,40 @@
+
+
+
+
+
+
+
+
+
+
+
+
 <div *ngIf="isAppear"  style="position: absolute; top: 50vh; left: 50vw;">
     <div class="spinner-border z-3" role="status">
       <span class="visually-hidden z-3">Loading...</span>
     </div>
   </div>
 
-    <div class="form-check d-flex justify-content-center fs-1 mt-3" *ngFor="let item of datadto" >
-        <label class="form-check-label" for="flexCheckDefault">
-            <input  [(ngModel)]="item.isBelong" class="form-check-input me-3" type="checkbox" value="" id="flexCheckDefault"  >
-            {{item.name}}
-        </label>
-    </div> 
-    <div class="text-center">
-        <button type="button" class="btn btn-primary mt-3 " (click)="addmember()">Add Members</button>
-    </div>  
+  <div class="container mt-3">
+    <div class="row justify-content-center">
+      <div class="  col-md-6">
+        <div *ngFor="let item of datadto" class="form-check d-flex align-items-center fs-1 mb-3">
+          <input 
+            [(ngModel)]="item.isBelong" 
+            class="form-check-input me-3" 
+            type="checkbox" 
+            [id]="'checkbox-' + item.name"
+          >
+          <label class="form-check-label" [for]="'checkbox-' + item.name">
+            {{ item.name }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="text-center">
+      <button type="button" class="btn btn-primary mt-3 " (click)="addmember()">Add Members</button>
+  </div>  

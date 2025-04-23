@@ -5,15 +5,15 @@
 </div>
 
     
-<div class="container">
+<div class="container" style="position: relative;">
   
     <h2>
       Total Amount of {{username}}
        @if(amount<0){
-        <span class="text-danger"> : {{amount}}</span> 
+        <span class="text-danger"> :  ₹{{amount}}</span> 
        }
        @else {
-        <span class="text-success" >  :{{amount}}</span> 
+        <span class="text-success" >  : ₹{{amount}}</span> 
        }
 
     </h2> 
@@ -80,19 +80,19 @@
         @if(username != item.key){
           ●
           @if( item.value <0){
-            <span class="text-danger"> Give {{-item.value}} to {{item.key}}</span> 
+            <span class="text-danger"> Give ₹{{-item.value}} to  {{item.key}}</span> 
            }
            @else {
-            <span class="text-success" > Take {{  item.value}} from {{item.key}}</span> 
+            <span class="text-success" > Take ₹{{  item.value}} from  {{item.key}}</span> 
            }
     
         }
      </h3>
     
-     <h2> Total Expense :  <b class="text-primary">{{totalExpense}}</b> </h2>
+     <h2> Total Expense :  <b class="text-primary">₹{{totalExpense}}</b> </h2>
      <br>
      <h3 class="text-center">Select Filter Based On PaidBy</h3>
-     <span class=" m-3 d-flex justify-content-center align-items-center">
+     <span class=" my-2 d-flex justify-content-center align-items-center">
       <div class="input-group d-flex justify-content-center align-items-center">
           <span class="input-group-text d-flex justify-content-center align-items-center">Search</span>
           <input type="text" class="form-control" [(ngModel)]="search" name="search" placeholder="Search..." aria-label="Search">
