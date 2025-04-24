@@ -14,6 +14,7 @@ export class ChartComponent {
   groupid :number = 0;
   TotalExpense :number = 0;
   groupName :string = '';
+  isAppear : boolean = false;
 constructor(private ServiceSrv : ServiceService , private router : ActivatedRoute){
 
   this.router.paramMap.subscribe(params =>{
@@ -23,7 +24,9 @@ constructor(private ServiceSrv : ServiceService , private router : ActivatedRout
   this.ServiceSrv.GetGroup(this.groupid).subscribe((res:any)=>{
     this.groupName = res.name
   })
+  this.isAppear =true;
   this.ServiceSrv.TotalExpenseForEveryUserForPerticularGroup(this.groupid).subscribe((res:any)=>{
+    this.isAppear =false;
     this.Data = res;
     console.log(res);
     

@@ -90,9 +90,12 @@ console.log(this.formdata.description);
   fData.append('imageFile',expenseData?.imageFile);
   fData.append('paidby',expenseData?.paidby);
   fData.append('paidto',expenseData?.paidto);
+  console.log(fData);
+  
   this.ServiceSrv.createexpense(fData).subscribe({
       //chat ka code
       next: (res: any) => {
+        this.isAppear =false;
         console.log(res);
         this.toastr.success("Expense Created", "Success");
             this.route.navigateByUrl('/home');
@@ -113,6 +116,8 @@ console.log(this.formdata.description);
         // });
       },
       error: (err: any) => {
+        this.isAppear =false;
+            this.route.navigateByUrl('/home');
         console.log(err);
         this.toastr.error(err.error, "Error");
         // your error handling for members
@@ -209,18 +214,48 @@ onCustomSubmit(){
 
    console.log(this.customdatadto);
    console.log(this.customformdata);
+   const expenseData:any = { ...this.customformdata };
+   expenseData.image  =  "image"; 
+   expenseData.description = this.customformdata.description
+
+   const fData = new FormData();
+   fData.append('amount',expenseData?.amount);
+   fData.append('description',expenseData?.description);
+   fData.append('groupid',expenseData?.groupid);
+   fData.append('image',expenseData?.image);
+   fData.append('imageFile',expenseData?.imageFile);
+   fData.append('paidby',expenseData?.paidby);
+  //  fData.append('paidto',expenseData?.paidto);
 
 
-   this.ServiceSrv.CreateExpenseByAdjustment(this.customformdata).subscribe({
+  const paidTo = [
+    { name: "aman", decimal: 100 },
+    { name: "vishu", decimal: 200 },
+    { name: "rahul", decimal: 300 },
+    { name: "wizard", decimal: 400 }
+  ];
+  
+  paidTo.forEach((item:any, index) => {
+    fData.append(`paidTo[${index}].name`, item.name);
+    fData.append(`paidTo[${index}].decimal`, item.decimal);
+  });
+
+
+   console.log(fData);
+   this.isAppear =true;
+   this.ServiceSrv.CreateExpenseByAdjustment(fData).subscribe({
     next: (res: any) => {
+      this.isAppear =false;
      console.log(res);
      this.toastr.success("Custom Expense Created" , "Success")  
      this.route.navigateByUrl('/home');
      
     },
     error:(err:any) =>{
+      this.isAppear =false;
      console.log(err);
-     this.toastr.error("Fill Full form" , "Error")  
+     this.toastr.error("Fill Full form" , "Error") 
+     this.route.navigateByUrl('/home'); 
      this.ServiceSrv.getmemberofgroup(this.groupid).subscribe((res:any)=>{
        this.datadto = res[0];
       console.log(res[0]);
