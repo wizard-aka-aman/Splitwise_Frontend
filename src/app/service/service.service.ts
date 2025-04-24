@@ -13,8 +13,8 @@ export class ServiceService {
 
   }
 
-  //  public BaseUrl :string= 'https://wizardaman.bsite.net';
-   public BaseUrl :string= 'https://localhost:7288';
+   public BaseUrl :string= 'https://wizardaman.bsite.net';
+  //  public BaseUrl :string= 'https://localhost:7288';
   //api's
 
   login(item: any) {
@@ -58,8 +58,8 @@ export class ServiceService {
     return this.http.get(`${this.BaseUrl}/Expense/GetDescription/`+groupid);
    }
 
-  GetAllActivity(name:string,start:number,end:number){
-    return this.http.get(`${this.BaseUrl}/Expense/GetActivity/${name}/${start}/${end}`);
+  GetAllActivity(name:string,start:number  ){
+    return this.http.get(`${this.BaseUrl}/Expense/GetActivity/${name}/${start}`);
   }
   
   TotalExpense(groupid:number){

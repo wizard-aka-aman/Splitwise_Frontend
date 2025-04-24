@@ -31,7 +31,7 @@ constructor(private ServiceSrv : ServiceService , private router : ActivatedRout
 
   this.ServiceSrv.TotalExpense(this.groupid).subscribe((res:any)=>{
     this.TotalExpense = res;
-    console.log(res);
+    console.log(res); // aaya
     
   })
 

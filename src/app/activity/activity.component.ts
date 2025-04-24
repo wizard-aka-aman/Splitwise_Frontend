@@ -12,15 +12,16 @@ import { FilterPipe } from '../pipe/filter.pipe';
 })
 export class ActivityComponent {
   username : string = '';
-  allActivity : any ;
+  allActivity : any[] = [] ;
   isAppear :boolean= false;
   search : string ='';
-  start :number = 0;
-  end : number = 10;
+  start :number = 0; 
   constructor(private ServiceSrv :ServiceService) {
     this.username = this.ServiceSrv.getUserName();
     this.isAppear =true;
-    this.ServiceSrv.GetAllActivity(this.username,this.start,this.end).subscribe((res:any)=>{
+    
+    console.log(this.start); 
+    this.ServiceSrv.GetAllActivity(this.username,this.start).subscribe((res:any)=>{
       this.allActivity = res ;
       this.isAppear =false;
       this.allActivity.sort((a:any, b:any) => new Date(b.addedWhen).getTime() - new Date(a.addedWhen).getTime());
@@ -33,26 +34,30 @@ export class ActivityComponent {
    recall(){
     this.isAppear =true;
     this.allActivity =[];
-    this.ServiceSrv.GetAllActivity(this.username,this.start,this.end).subscribe((res:any)=>{
+    console.log(this.start); 
+    
+    this.ServiceSrv.GetAllActivity(this.username,this.start).subscribe((res:any)=>{
+      console.log(res);
       this.allActivity = res ;
+      
       this.isAppear =false;
       this.allActivity.sort((a:any, b:any) => new Date(b.addedWhen).getTime() - new Date(a.addedWhen).getTime());
-      console.log(res);
+       
 
 
     })
    }
    previous(){
     if (this.start > 0) {
-      this.start -= 10;
-    this.end -= 10; 
+      this.start -= 10; 
     this.recall() 
     }
    }
    next(){ 
-      this.start += 10;
-    this.end += 10;   
+    if(!(this.allActivity.length < 10)){
+      this.start += 10; 
     this.recall() 
+    }
    }
    
 }

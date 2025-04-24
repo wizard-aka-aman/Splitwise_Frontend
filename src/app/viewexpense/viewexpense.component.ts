@@ -42,31 +42,36 @@ this.username = this.ServiceSrv.getUserName();
 this.isAppear =true;
   this.ServiceSrv.GetExpenseByUser(this.groupid , this.name).subscribe((res:any)=>{
     console.log(res);
+
     this.amount = res;
-  })
-  this.isAppear =true;
-  this.ServiceSrv.GetExpenseForEveryUser(this.groupid , this.name).subscribe((res:any)=>{
-    console.log(res);
-    this.isAppear =false;
-    this.alluseramount = res;
-    this.allsettleamount = res;
-  })
-
-  this.ServiceSrv.GetDescription(this.groupid).subscribe((res:any)=>{
-    this.allExpense = res;
-    console.log(res);
     
-  })
-
-  this.ServiceSrv.TotalExpense(this.groupid).subscribe((res:any)=>{
-    this.totalExpense = res;
-    this.isAppear =false;
-    console.log(res);
-    
-  })
-  this.ServiceSrv.getmemberofgroup(this.groupid).subscribe((res:any)=>{
-    console.log(res);
-    this.datadto = res[0];
+    this.ServiceSrv.GetExpenseForEveryUser(this.groupid , this.name).subscribe((res:any)=>{
+      console.log(res);
+      
+      this.alluseramount = res;
+      this.allsettleamount = res;
+      
+      this.ServiceSrv.GetDescription(this.groupid).subscribe((res:any)=>{
+        
+        this.allExpense = res;
+        console.log(res);
+        
+        
+        this.ServiceSrv.TotalExpense(this.groupid).subscribe((res:any)=>{
+          this.totalExpense = res;
+          
+          console.log(res);
+          
+          
+          this.ServiceSrv.getmemberofgroup(this.groupid).subscribe((res:any)=>{
+            
+            console.log(res);
+            this.datadto = res[0];
+            this.isAppear =  false
+          })
+        })
+      })
+    })
   })
 }
 

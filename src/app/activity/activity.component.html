@@ -13,12 +13,14 @@
       </div>
      </span>
      <div class="row  d-flex justify-content-around"   >
-      <div class=" btn btn-secondary col-6 w-auto  " (click)="previous()" >Previous</div>
-      <div class="col-6 btn btn-secondary w-auto  " (click)="next()"  >Next</div>
+       <div class=" btn btn-secondary col-3 w-auto  " (click)="previous()" >Previous</div>
+       <!-- <span class="fs-3"> {{start+1}} - {{start+10}}</span> -->
+       <div class="   col-3 w-auto  fs-3"  >{{start+1}} - {{start+10}}</div>
+      <div class="col-3 btn btn-secondary w-auto  " (click)="next()"  >Next</div>
     </div>
     <div class="row row-cols-1 row-cols-md-1 ">
         <div class="col" *ngFor="let item of allActivity | filter:search">
-         @if(item.paidBy != item.paidTo){
+         <!-- @if(item.paidBy != item.paidTo){ -->
             <div class="card my-2" >
               <div class="card-body">
                 
@@ -32,7 +34,7 @@
                 <p class="card-text right-side fs-3" style="position: absolute; right: 20px; top:30px;"> {{item.addedWhen | date :  'longDate'}} {{item.addedWhen | date :  'shortTime'}}</p>
               </div>
             </div>
-         }
+         <!-- } -->
         </div> 
       </div>
      
