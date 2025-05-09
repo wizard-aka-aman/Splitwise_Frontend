@@ -217,7 +217,8 @@ onCustomSubmit(){
    const expenseData:any = { ...this.customformdata };
    expenseData.image  =  "image"; 
    expenseData.description = this.customformdata.description
-
+   console.log(expenseData);
+   
    const fData = new FormData();
    fData.append('amount',expenseData?.amount);
    fData.append('description',expenseData?.description);
@@ -228,16 +229,17 @@ onCustomSubmit(){
   //  fData.append('paidto',expenseData?.paidto);
 
 
-  const paidTo = [
-    { name: "aman", decimal: 100 },
-    { name: "vishu", decimal: 200 },
-    { name: "rahul", decimal: 300 },
-    { name: "wizard", decimal: 400 }
-  ];
+  // const paidTo = [
+  //   { name: "aman", decimal: 100 },
+  //   { name: "vishu", decimal: 200 },
+  //   { name: "rahul", decimal: 300 },
+  //   { name: "wizard", decimal: 400 }
+  // ];
   
-  paidTo.forEach((item:any, index) => {
-    fData.append(`paidTo[${index}].name`, item.name);
-    fData.append(`paidTo[${index}].decimal`, item.decimal);
+  expenseData.paidto.forEach((item:any, index:any) => {
+    fData.append(`paidTo[${index}].name`, item.name);  
+    fData.append(`paidTo[${index}].decimal`, item.decimal ?? 0);
+    console.log(item.decimal+" " + index);
   });
 
 

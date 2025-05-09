@@ -14,7 +14,7 @@
    
     <div   *ngFor="let msg of messages" class="d-flex mb-2" [ngClass]="msg.sender === user ? 'justify-content-end' : 'justify-content-start'">
       <div class="message-bubble px-3 py-2" style="position: relative;" [ngClass]="msg.sender === user ? 'bg-primary text-white me-2' : 'bg-secondary text-white ms-2'">
-        <small class="fw-bold d-block  " [ngClass]="msg.sender === user ? 'd-flex justify-content-end' : '' "   >{{ msg.sender }}</small>
+        <small class="fw-bold d-block  " [ngClass]="msg.sender === user ? 'd-flex justify-content-end' : ' ' "   >{{ msg.sender }}</small>
         {{ msg.message }}   
         <p class="text-muted" [ngClass]="msg.sender === user ? 'd-flex justify-content-end' : '' " 
           style="font-size: 15px; margin: 0; padding: 0;">{{msg.sentAt | date : 'MMM d, y, h:mm a'}}</p>
