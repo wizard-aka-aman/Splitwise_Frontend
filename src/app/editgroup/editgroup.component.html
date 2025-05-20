@@ -1,42 +1,51 @@
-<div *ngIf="isAppear"  style="position: absolute; top: 50vh; left: 50vw;">
-    <div class="spinner-border z-3" role="status">
-      <span class="visually-hidden z-3">Loading...</span>
-    </div>
+<!-- Spinner Loader -->
+<div *ngIf="isAppear" class="position-absolute top-50 start-50 translate-middle z-3">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
   </div>
-  
-  <section class="vh-100 gradient-custom">
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div class="card bg-dark text-white" style="border-radius: 1rem;">
-              <div class="card-body p-5 text-center">
-    
-                <div class="mb-md-5 mt-md-4 pb-5">
-                      <form [formGroup]="formvalue">
-  
-                          <h2 class="fw-bold mb-2 text-uppercase">Edit Group Name</h2>
-                          <p class="text-white-50 mb-5">Please enter your group name</p>
-                          
-                          <div data-mdb-input-init class="form-outline form-white mb-4">
-                              <label class="form-label" for="typeuserNameX">Group Name</label>
-                              <input formControlName="Name" type="userName" id="typeuserNameX" class="form-control form-control-lg" />
-                              @if(formvalue.controls['Name'].errors?.['required'] && formvalue.controls['Name'].touched  ){
-                                <span class="text-danger">*Required</span>
-                              }
-                               
-                          </div>
-                           
-                          
-                          
-                          <button data-mdb-button-init data-mdb-ripple-init [disabled]="formvalue.invalid" 
-                          class="btn btn-outline-light btn-lg px-5" (click)="onSubmit()"  >Submit</button>
-                      </form> 
+</div>
+
+<!-- Create Group Form Section -->
+<section class="min-vh-100 d-flex align-items-center bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-sm border-0 rounded-4">
+          <div class="card-body p-4">
+            <form [formGroup]="formvalue">
+              <h2 class="fw-semibold text-center mb-3 text-primary">Edit Group</h2>
+              <p class="text-muted text-center mb-4">Please enter your group name</p>
+
+              <!-- Group Name Input -->
+              <div class="mb-3">
+                <label for="typeuserNameX" class="form-label">Group Name</label>
+                <input
+                  formControlName="Name"
+                  type="text"
+                  id="typeuserNameX"
+                  class="form-control form-control-lg"
+                  [ngClass]="{'is-invalid': formvalue.controls['Name'].errors?.['required'] && formvalue.controls['Name'].touched}"
+                />
+                <div *ngIf="formvalue.controls['Name'].errors?.['required'] && formvalue.controls['Name'].touched" class="invalid-feedback">
+                  *Required
                 </div>
-     
-    
               </div>
-            </div>
+
+              <!-- Submit Button -->
+              <div class="d-grid">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-lg"
+                  [disabled]="formvalue.invalid"
+                  (click)="onSubmit()"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>

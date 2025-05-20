@@ -1,79 +1,69 @@
- 
-<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" >
-    <div class="container-fluid">
-      <a class="navbar-brand fs-1" routerLink="home"  >SplitWise</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active fs-3" aria-current="page" routerLink="home"  >Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fs-3"  routerLink="creategroup" >Create Group</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fs-3" routerLink="activity" >Activity</a>
-          </li> <li class="nav-item">
-            <a class="nav-link fs-3"  routerLink="chats" [queryParams]="{groupid : 0}" >Global-Chat</a>
-          </li>
-         <li class="nav-item">
-          <a class="nav-link fs-3"  routerLink="personalchat"  >Personal-Chat</a>
-        </li> 
-        </ul>
-        <!-- <span class="navbar-text" > 
-            <h3 class="me-3">Wellcome, {{userName}}!</h3>
-        </span> -->
-        
-      <button type="button" class="btn btn-outline-success   fs-5 me-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm py-3">
+  <div class="container-fluid">
+    <a class="navbar-brand fs-2 fw-bold text-primary" routerLink="home">SplitWise</a> 
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link fs-5" routerLink="home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fs-5" routerLink="creategroup">Create Group</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fs-5" routerLink="activity">Activity</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fs-5" routerLink="chats" [queryParams]="{groupid: 0}">Global-Chat</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fs-5" routerLink="personalchat">Personal-Chat</a>
+        </li>
+      </ul>
+
+      <!-- Welcome Button -->
+      <button type="button" class="btn btn-outline-primary me-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
         Welcome, {{userName}}!
       </button>
 
+      <!-- Logout -->
+      <a class="nav-link fs-5 text-danger" style="cursor: pointer;" (click)="onLogout()">
+        <i class="fa-solid fa-right-from-bracket me-1"></i> Logout
+      </a>
+    </div>
+  </div>
+</nav>
 
-<!-- --------------------------------------------------------------------------------Model -------------------------------------->
-        <!-- Button trigger modal -->
-
-<!-- Modal -->
+<!-- MODAL -->
 <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Total Spent</h5>
+    <div class="modal-content shadow-sm">
+      <div class="modal-header bg-light">
+        <h5 class="modal-title fw-bold" id="staticBackdropLabel">Total Spent</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="row row-cols-1 row-cols-md-1 ">
-          <h4>Total Amount Of Money You Spent In These Groups!</h4>
-          <hr> 
-          <div class="col" *ngFor="let item of Data"> 
-                <h3 class="">{{item.key}} <span class="text-muted fs-3"> →</span> ₹ {{item.value}}</h3>
-          </div>  
-          <h2 class=""> Total : {{Total}}</h2>
+        <div class="row">
+          <h5 class="mb-3">Total Amount Of Money You Spent In These Groups:</h5>
+          <hr>
+          <div class="col" *ngFor="let item of Data">
+            <h6 class="text-secondary">{{item.key}} <span class="text-muted">→</span> ₹ {{item.value}}</h6>
+          </div>
+          <hr>
+          <h5 class="fw-bold text-primary">Total: ₹ {{Total}}</h5>
         </div>
-
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  >Custom Add Expense</button> -->
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
-        <!-- --------------------------------------------------------------------------------Model khtm -------------------------------------->
 
-
-
-        <span class="navbar-text"> 
-            <a class="nav-link fs-4 " style="cursor: pointer;"  (click)="onLogout()" > 
-              <i class="fa-solid fa-right-from-bracket"></i>Logout</a> 
-        </span>
-      </div>
-    </div>
-  </nav>
-
-
-
-  
+<!-- MAIN OUTLET -->
 <router-outlet></router-outlet>
- 

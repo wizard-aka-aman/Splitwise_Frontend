@@ -1,28 +1,54 @@
-<div *ngIf="isAppear"  style="position: absolute; top: 50vh; left: 50vw;">
+<div *ngIf="isAppear" style="position: absolute; top: 50vh; left: 50vw;">
   <div class="spinner-border z-3" role="status">
     <span class="visually-hidden z-3">Loading...</span>
   </div>
 </div>
-<div     class="chat-container  d-flex flex-column h-100 p-3" id="chatt">
-  <!-- Messages -->
-  <div class="username-body d-flex justify-content-center align-items-center rounded fs-2 mb-3" style="background-color: rgb(161, 159, 255); width: auto; height: 50px;">
-    
-      {{naam}}
-    
-</div>
-  <div #chatContainer class="chat-messages flex-grow-1 overflow-auto mb-3"  style="height: 65vh;">
-   
-    <div   *ngFor="let msg of messages" class="d-flex mb-2" [ngClass]="msg.sender === user ? 'justify-content-end' : 'justify-content-start'">
-      <div class="message-bubble px-3 py-2" style="position: relative;" [ngClass]="msg.sender === user ? 'bg-primary text-white me-2' : 'bg-secondary text-white ms-2'">
-        <small class="fw-bold d-block  " [ngClass]="msg.sender === user ? 'd-flex justify-content-end' : ' ' "   >{{ msg.sender }}</small>
-        {{ msg.message }}   
-        <p class="text-muted" [ngClass]="msg.sender === user ? 'd-flex justify-content-end' : '' " 
-          style="font-size: 15px; margin: 0; padding: 0;">{{msg.sentAt | date : 'MMM d, y, h:mm a'}}</p>
+
+<div class="chat-container d-flex flex-column h-100 p-3" id="chatt" style="max-height: 100vh;">
+
+  <!-- Username Header -->
+  <div 
+    class="username-body d-flex justify-content-center align-items-center rounded fs-4 mb-3 px-3 py-2" 
+    style="background-color: rgb(161, 159, 255); min-height: 50px; max-width: 100%; word-break: break-word;">
+    {{ naam }}
+  </div>
+
+  <!-- Messages Area -->
+  <div 
+    #chatContainer 
+    class="chat-messages flex-grow-1 overflow-auto mb-3"  
+    style="min-height: 300px; max-height: 65vh;">
+
+    <div 
+      *ngFor="let msg of messages" 
+      class="d-flex mb-2" 
+      [ngClass]="msg.sender === user ? 'justify-content-end' : 'justify-content-start'">
+
+      <div 
+        class="message-bubble px-3 py-2 rounded-3" 
+        style="position: relative; max-width: 70vw; word-wrap: break-word;"
+        [ngClass]="msg.sender === user ? 'bg-primary text-white me-2' : 'bg-secondary text-white ms-2'">
+
+        <small 
+          class="fw-bold d-block mb-1" 
+          [ngClass]="msg.sender === user ? 'text-end' : 'text-start'">
+          {{ msg.sender }}
+        </small>
+
+        <div>{{ msg.message }}</div>
+
+        <p 
+          class="text-muted mb-0" 
+          [ngClass]="msg.sender === user ? 'text-end' : 'text-start'" 
+          style="font-size: 0.8rem;">
+          {{ msg.sentAt | date: 'MMM d, y, h:mm a' }}
+        </p>
+
       </div>
     </div>
   </div>
 
-  <!-- Input -->
+  <!-- Input Area -->
   <div class="chat-input d-flex">
     <input
       type="text"
@@ -30,17 +56,9 @@
       placeholder="Type a message..."
       [(ngModel)]="message"
       (keydown.enter)="send()"
+      aria-label="Type a message"
     />
     <button class="btn btn-primary ms-2" (click)="send()">Send</button>
   </div>
+
 </div>
-
-<!-- <script>
-  window.onload = function () {
-  const container = document.getElementById('chatt');
-  if (container) {
-    container.scrollTop =  
-  }
-};
-
-</script> -->

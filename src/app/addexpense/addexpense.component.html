@@ -1,108 +1,174 @@
-<div *ngIf="isAppear"  style="position: absolute; top: 50vh; left: 50vw;">
-  <div class="spinner-border z-3" role="status">
+<div *ngIf="isAppear" style="position: absolute; top: 50vh; left: 50vw;">
+  <div class="spinner-border text-primary z-3" role="status">
     <span class="visually-hidden z-3">Loading...</span>
   </div>
 </div>
 
-<div class="container">
-    <form [formGroup]="formvalue">
+<div class="container my-4">
+  <form [formGroup]="formvalue" novalidate>
 
-        <h2 class="fw-bold mb-2 text-uppercase">Add an Expense</h2> 
-        
-        <div data-mdb-input-init class="form-outline form-white mb-4">
-            <label class="form-label" for="typeuserNameX">Description</label>
-            <input formControlName="description" type="text" id="typeuserNameX" class="form-control form-control-lg" />
-            @if(formvalue.controls['description'].errors?.['required'] && formvalue.controls['description'].touched  ){
-              <span class="text-danger">*Required</span>
-            }
-             
-        </div>
-        
-        <div data-mdb-input-init class="form-outline form-white mb-4">
-            <label class="form-label" for="typePasswordX">Amount</label>
-            <input  type="number" formControlName="amount" id="typeamountX" class="form-control form-control-lg" />
-            @if(formvalue.controls['amount'].errors?.['required'] && formvalue.controls['amount'].touched  ){
-              <span class="text-danger">*Required</span>
-            }
-            @else if (formvalue.controls['amount'].errors?.['pattern'] && formvalue.controls['amount'].touched ) {
-              <div class="text-danger">
-                Can't be Negative
-              </div>
-            } 
-        </div>
-        <label>Paid By : </label> <br>
-        <select formControlName="paidby" class="form-select" aria-label="Default select example" name="paidby" id="">
-          @for (item of datadto; track $index) {
-            <option   value={{item.name}}>{{item.name}}</option>
-          }
-        </select>
-        @if(formvalue.controls['paidby'].errors?.['required'] && formvalue.controls['paidby'].touched  ){
-          <span class="text-danger">*Required</span>
+    <h2 class="fw-bold mb-4 text-uppercase text-center">Add an Expense</h2>
+
+    <div class="mb-4">
+      <label for="typeuserNameX" class="form-label fw-semibold">Description</label>
+      <input
+        formControlName="description"
+        type="text"
+        id="typeuserNameX"
+        class="form-control form-control-lg"
+        placeholder="Enter expense description"
+        [class.is-invalid]="formvalue.controls['description'].invalid && formvalue.controls['description'].touched"
+      />
+      <div *ngIf="formvalue.controls['description'].invalid && formvalue.controls['description'].touched" class="invalid-feedback">
+        *Required
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="typeamountX" class="form-label fw-semibold">Amount</label>
+      <input
+        formControlName="amount"
+        type="number"
+        id="typeamountX"
+        class="form-control form-control-lg"
+        placeholder="Enter amount"
+        [class.is-invalid]="formvalue.controls['amount'].invalid && formvalue.controls['amount'].touched"
+      />
+      <div *ngIf="formvalue.controls['amount'].errors?.['required'] && formvalue.controls['amount'].touched" class="invalid-feedback">
+        *Required
+      </div>
+      <div *ngIf="formvalue.controls['amount'].errors?.['pattern'] && formvalue.controls['amount'].touched" class="invalid-feedback">
+        Can't be Negative
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="paidbySelect" class="form-label fw-semibold">Paid By</label>
+      <select
+        formControlName="paidby"
+        id="paidbySelect"
+        class="form-select"
+        [class.is-invalid]="formvalue.controls['paidby'].invalid && formvalue.controls['paidby'].touched"
+      >
+        <option value="" disabled selected>Select payer</option>
+        <!-- Angular template syntax remains same -->
+        @for (item of datadto; track $index) {
+          <option value={{item.name}}>{{item.name}}</option>
         }
-    
-         
-        <label>    Image </label> <br>
-        <!-- <input formControlName="Image" type="file" name="Image" id="typeuserNameX" class="form-control form-control-lg" /> -->
-
-
-        <!-- chatgpt -->
-        <input type="file" (change)="onFileSelected($event)" class="form-control form-control-lg" />
-
-      </form>
-      <!-- <label for="">Image</label>
-      <input type="file" name="formdata1" [(ngModel)]="formdata1"  (change)="onFileSelected($event)" id=""> -->
-        <div class="div   ">
-            <div class="form-check d-flex  fs-1 mt-3" *ngFor="let item of datadto" >
-                <label class="form-check-label" for="flexCheckDefault">
-                    <input  [(ngModel)]="item.isBelong" class="form-check-input me-3" type="checkbox" value="" id="flexCheckDefault"  >
-                    {{item.name}}
-                </label>
-              </div> 
-                <div class="d-flex justify-content-center m-3 p-3">
-                  <button type="button" class="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    More Option
-                  </button>
-                </div>
-            
-        </div>
-<!-- --------------------------------------------------------------------------------Model -------------------------------------->
-        <!-- Button trigger modal -->
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Split By Adjustment</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </select>
+      <div *ngIf="formvalue.controls['paidby'].invalid && formvalue.controls['paidby'].touched" class="invalid-feedback">
+        *Required
       </div>
-      <div class="modal-body">
-        <div class="form-check d-flex mb-2" *ngFor="let item of customdatadto" >
-          <!-- <label class="form-check-label " for="flexCheckDefault">
-              <input  [(ngModel)]="item.isBelong" name="{{item.isBelong}}" class="form-check-input me-3" type="checkbox" value="" id="flexCheckDefault"  >
-            </label> -->
-            
-            <div class="" style="   font-size: 20px; font-weight: bold;">
-              {{item.name}}
+    </div>
 
-            </div>
-          <label class="form-check-label ps-3" for="flexCheckDefault">
-              <input  [(ngModel)]="item.decimal" min="0" name="{{item.decimal}}" class="ModelInput " type="number"  value=""  style="width: 250px; height: 40px;" id="flexCheckDefault"  >
-               
-          </label>
-        </div> 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onCustomSubmit()" >Custom Add Expense</button>
+    <div class="mb-4">
+      <label for="imageInput" class="form-label fw-semibold">Image</label>
+      <input
+        type="file"
+        id="imageInput"
+        (change)="onFileSelected($event)"
+        class="form-control form-control-lg"
+      />
+    </div>
+  </form>
+
+  <div class="mb-4">
+    <label class="form-label fw-semibold d-block mb-3">Split Between</label>
+    <div class="d-flex flex-wrap gap-3 fs-5">
+      <div class="form-check" *ngFor="let item of datadto">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="splitCheck{{item.name}}"
+          [(ngModel)]="item.isBelong"
+          name="splitCheck{{item.name}}"
+        />
+        <label class="form-check-label" for="splitCheck{{item.name}}">
+          {{item.name}}
+        </label>
       </div>
     </div>
   </div>
-</div>
-        <!-- --------------------------------------------------------------------------------Model khtm -------------------------------------->
 
-        
-        <!-- <h3 class="text-center">Paid By You and Split Equally or <a class=""><div class="btn btn-dark">Customize</div></a> </h3> -->
-        <button data-mdb-button-init data-mdb-ripple-init [disabled]="formvalue.invalid" class="btn btn-primary btn-lg px-5" (click)="onSubmit()"  >Add Expense</button>
-        
+  <div class="d-flex justify-content-center mb-4">
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
+    >
+      More Options
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="staticBackdropLabel">Split By Adjustment</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="mb-3" *ngFor="let item of customdatadto">
+            <label class="form-label fw-semibold d-block mb-1">{{item.name}}</label>
+            <input
+              type="number"
+              class="form-control"
+              min="0"
+              style="max-width: 280px;"
+              [(ngModel)]="item.decimal"
+              name="{{item.decimal}}"
+            />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            (click)="onCustomSubmit()"
+          >
+            Custom Add Expense
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button
+      data-mdb-button-init
+      data-mdb-ripple-init
+      [disabled]="formvalue.invalid"
+      class="btn btn-primary btn-lg px-5"
+      (click)="onSubmit()"
+    >
+      Add Expense
+    </button>
+  </div>
 </div>

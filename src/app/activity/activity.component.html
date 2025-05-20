@@ -1,42 +1,69 @@
-<div *ngIf="isAppear"  style="position: absolute; top: 50vh; left: 50vw;">
-  <div class="spinner-border z-3" role="status">
-    <span class="visually-hidden z-3">Loading...</span>
+<!-- Spinner Loader -->
+<div *ngIf="isAppear" class="position-absolute top-50 start-50 translate-middle z-3">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
   </div>
-</div> 
-<div class="container">
-  <br>
-     <h3 class="text-center">Select Filter Based On PaidBy</h3>
-     <span class="  my-2 d-flex justify-content-center align-items-center">
-      <div class="input-group d-flex justify-content-center align-items-center">
-          <span class="input-group-text d-flex justify-content-center align-items-center">Search</span>
-          <input type="text" class="form-control" [(ngModel)]="search" name="search" placeholder="Search..." aria-label="Search">
-      </div>
-     </span>
-     <div class="row  d-flex justify-content-around"   >
-       <div class=" btn btn-secondary col-3 w-auto  " (click)="previous()" >Previous</div>
-       <!-- <span class="fs-3"> {{start+1}} - {{start+10}}</span> -->
-       <div class="   col-3 w-auto  fs-3"  >{{start+1}} - {{start+10}}</div>
-      <div class="col-3 btn btn-secondary w-auto  " (click)="next()"  >Next</div>
-    </div>
-    <div class="row row-cols-1 row-cols-md-1 ">
-        <div class="col" *ngFor="let item of allActivity | filter:search">
-         <!-- @if(item.paidBy != item.paidTo){ -->
-            <div class="card my-2" >
-              <div class="card-body">
-                
-                <h3 class="card-title"> {{item.paidBy}} Added "{{item.description}}" in "{{item.groupName}}"</h3>
-                    @if(item.paidBy == username){
-                      <p class="card-text fs-5   "> {{item.paidBy}} gave <b class="text-success"> ₹{{item.amount}} </b> to {{item.paidTo}}</p>
-                    }
-                    @else{
-                      <p class="card-text fs-5"> {{item.paidBy}} gave <b  class="text-danger" > ₹{{item.amount}} </b> to {{item.paidTo}}</p>
-                    } 
-                <p class="card-text right-side fs-3" style="position: absolute; right: 20px; top:30px;"> {{item.addedWhen | date :  'longDate'}} {{item.addedWhen | date :  'shortTime'}}</p>
-              </div>
-            </div>
-         <!-- } -->
-        </div> 
-      </div>
-     
 </div>
- 
+
+<!-- Main Container -->
+<div class="container py-4">
+  <!-- Header -->
+  <h3 class="text-center mb-4 text-primary">Select Filter Based On PaidBy</h3>
+
+  <!-- Search Input -->
+  <div class="d-flex justify-content-center mb-4">
+    <div class="input-group w-100 w-md-50">
+      <span class="input-group-text">Search</span>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="search"
+        name="search"
+        placeholder="Search..."
+        aria-label="Search"
+      />
+    </div>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="row justify-content-center align-items-center mb-4">
+    <div class="col-auto">
+      <button class="btn btn-outline-secondary" (click)="previous()">Previous</button>
+    </div>
+    <div class="col-auto fs-5 fw-medium">
+      {{start + 1}} - {{start + 10}}
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-outline-secondary" (click)="next()">Next</button>
+    </div>
+  </div>
+
+  <!-- Activity Feed -->
+  <div class="row row-cols-1 g-3">
+    <div class="col" *ngFor="let item of allActivity | filter:search">
+      <div class="card shadow-sm border border-light rounded-4 bg-white">
+        <div class="card-body">
+          <!-- Top Row: Main Info and Date/Time -->
+          <div class="d-flex justify-content-between flex-wrap">
+            <div class="mb-2">
+              <h4 class="text-dark fw-bold mb-1">
+                {{item.paidBy}} Added 
+                <span class="text-primary fw-semibold">"{{item.description}}"</span> 
+                in <span class="text-muted">"{{item.groupName}}"</span>
+              </h4>
+              <p class="mb-0 fs-5">
+                {{item.paidBy}} gave 
+                <b [ngClass]="item.paidBy === username ? 'text-success' : 'text-danger'">₹{{item.amount}}</b> 
+                to {{item.paidTo}}
+              </p>
+            </div>
+
+            <div class="text-muted  fs-4 text-md-end">
+              {{item.addedWhen | date:'medium'}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

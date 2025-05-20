@@ -54,6 +54,7 @@ this.isAppear =true;
       this.ServiceSrv.GetDescription(this.groupid).subscribe((res:any)=>{
         
         this.allExpense = res;
+        this.allExpense = this.allExpense.filter( (e:any) => e.paidBy !== e.paidTo );
         console.log(res);
         
         

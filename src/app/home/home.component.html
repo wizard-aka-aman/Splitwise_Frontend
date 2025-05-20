@@ -1,29 +1,52 @@
-<div *ngIf="isAppear"  style="position: absolute; top: 50vh; left: 50vw;">
-    <div class="spinner-border z-3" role="status">
-      <span class="visually-hidden z-3">Loading...</span>
+<!-- Loading Spinner -->
+<div *ngIf="isAppear" class="position-fixed top-50 start-50 translate-middle z-3">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<!-- Group List Container -->
+<div class="container my-5">
+  <div class="row g-4 justify-content-center">
+    <div
+      class="col-12 col-sm-10 col-md-6 col-lg-4"
+      *ngFor="let item of data"
+    >
+      <div class="group-card shadow-sm rounded p-4 position-relative">
+        <!-- Group Name -->
+        <div class="group-header text-center mb-3">
+          <h4 class="group-name">{{ item.name }}</h4>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons d-flex flex-wrap justify-content-center gap-2">
+          <a class="custom-btn" [routerLink]="['/addmember', item.groupId]">➕ Add Members</a>
+          <a class="custom-btn" [routerLink]="['/addexpense', item.groupId]">💰 Add Expense</a>
+          <a class="custom-btn" [routerLink]="['/viewmember', item.groupId]">👥 View Members</a>
+          <a class="custom-btn" [routerLink]="['/viewexpense', item.groupId, loggedInUser]">📄 View Expense</a>
+          <a class="custom-btn" [routerLink]="['/chats']" [queryParams]="{ groupid: item.groupId }">💬 Chat</a>
+          <a class="custom-btn" [routerLink]="['/chart', item.groupId]">📊 Chart</a>
+        </div>
+
+        <!-- Edit Group -->
+        <a
+          class="edit-icon text-muted"
+          [routerLink]="['/editgroup', item.groupId]"
+          [queryParams]="{ name: item.name }"
+          title="Edit Group"
+        >
+          ✏️
+        </a>
+
+        <!-- Delete Group -->
+        <a
+          class="delete-icon text-danger"
+          (click)="deletegroup(item.groupId)"
+          title="Delete Group"
+        >
+          🗑️
+        </a>
+      </div>
     </div>
   </div>
-
-<div class="row mt-5">
- 
-    
-        <div class="col-sm-5 m-3 " *ngFor="let item of data">
-            <div class="card">
-                <div class="card-body "> 
-                    <h5 class="card-title">{{item.name}}</h5>  
-
-                    <a  class="btn btn-primary m-2"  [routerLink]="['/addmember', item.groupId]"  >Add Members</a>
-                    <a  class="btn btn-secondary m-2"  [routerLink]="['/addexpense', item.groupId]"  >Add Expense</a>
-                    <a  class="btn btn-secondary m-2"  [routerLink]="['/viewmember', item.groupId]"  >View Member</a>
-                    <a  class="btn btn-secondary m-2"  [routerLink]="['/viewexpense', item.groupId , loggedInUser]"  >View Expense</a>
-                    <a  class="btn btn-success m-2"  [routerLink]="['/chats']" [queryParams]="{ groupid: item.groupId }"  >Chat</a>
-                    <a  class="btn btn-warning m-2"   [routerLink]="['/chart', item.groupId]"   >Chart</a>
-
-                    <a [routerLink]="['/editgroup', item.groupId]" [queryParams]="{ name: item.name }" class="fs-4" style="position: absolute; top: 0; right: 10px;" > <i class="fas fa-edit"></i> </a>
-                    <a   (click)="deletegroup(item.groupId)" class="fs-4  " style="cursor :pointer; color: red; position: absolute; bottom: 0; right: 10px;" > <i class="fa-solid fa-trash"></i> </a>
-            </div>
-        </div>
-          </div> 
-          
-  
-    </div>
+</div>

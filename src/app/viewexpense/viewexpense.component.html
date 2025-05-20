@@ -1,153 +1,200 @@
-<div *ngIf="isAppear"  style="position: absolute; top: 40vh; left: 50vw;">
-  <div class="spinner-border z-3" role="status">
-    <span class="visually-hidden z-3">Loading...</span>
+<div *ngIf="isAppear" class="position-fixed top-50 start-50 translate-middle z-50">
+  <div class="spinner-border text-primary" role="status" style="width: 4rem; height: 4rem;">
+    <span class="visually-hidden">Loading...</span>
   </div>
 </div>
 
-    
-<div class="container" style="position: relative;">
-  
-    <h2>
-      Total Amount of {{username}}
-       @if(amount<0){
-        <span class="text-danger"> :  ₹{{amount}}</span> 
-       }
-       @else {
-        <span class="text-success" >  : ₹{{amount}}</span> 
-       }
+<div class="container py-4 position-relative">
 
-    </h2> 
-    <a  class=" ms-3 right-side fs-4" style="position: absolute; top:99px; right: 240px;" >
-      
-      <button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        Settle Up
-      </button>
-    </a>
+  <div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
+    <h2 class="mb-2">
+      Total Amount of <strong>{{ username }}</strong>
+      <span *ngIf="amount < 0" class="text-danger">: ₹{{ amount }}</span>
+      <span *ngIf="amount >= 0" class="text-success">: ₹{{ amount }}</span>
+    </h2>
 
-    <!-- --------------------------------------------------------------------------------Model -------------------------------------->
-        <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-danger mb-2"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
+    >
+      Settle Up
+    </button>
+  </div>
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Settle Up</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row row-cols-1 row-cols-md-1 ">
-          <div class="col" *ngFor="let item of allsettleamount">
-            @if(item.key != username && item.value> 0){
-             <h4>Which balance do you want to settle?</h4>
-              <div class="card mb-1" >
-                <div class="card-body" style=" padding: 5px;">
-                  <h3 class="card-title">{{item.key}}</h3>  
-                        <p class="card-text fs-5   ">  <b class="text-success"> ₹{{item.value}} </b> </p>
-                      
-                        {{item.name}}
-                        <label class="form-check-label" for="flexCheckDefault">
-                            <input  min="10" [(ngModel)]="item.value"  max="{{item.value}}" name="{{item.decimal}}" class=" " type="number"  value=""  style="width: 150px; height: 50px;" id="flexCheckDefault"  >
-                             
-                        </label>
-                      <button type="button" class="btn btn-danger right-side " data-bs-dismiss="modal" (click)="settle(item.key , item.value)" style="position: absolute; right: 20px; top:30px;" >Settle !</button>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="staticBackdropLabel">Settle Up</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div *ngFor="let item of allsettleamount" class="mb-3">
+            <ng-container *ngIf="item.key !== username && item.value > 0">
+              <h5>Which balance do you want to settle?</h5>
+              <div class="card shadow-sm">
+                <div class="card-body d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+                  <div>
+                    <h6 class="card-title mb-1">{{ item.key }}</h6>
+                    <p class="text-success fs-5 mb-0">₹{{ item.value }}</p>
+                    <small class="text-muted">{{ item.name }}</small>
+                  </div>
+                  <div>
+                    <input
+                      type="number"
+                      class="form-control"
+                      style="max-width: 150px;"
+                      min="10"
+                      [max]="item.value"
+                      [(ngModel)]="item.value"
+                      name="{{ item.decimal }}"
+                      aria-label="Settle amount"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-bs-dismiss="modal"
+                    (click)="settle(item.key, item.value)"
+                  >
+                    Settle!
+                  </button>
                 </div>
               </div>
-              
-              
-            }
-           
-          </div>  
+            </ng-container>
+          </div>
         </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  >Custom Add Expense</button> -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-        <!-- --------------------------------------------------------------------------------Model khtm -------------------------------------->
-        <!-- <div *ngIf="isAppear"  style="position: absolute; top: 50vh; left: 50vw;">
-          <div class="spinner-border z-3" role="status">
-            <span class="visually-hidden z-3">Loading...</span>
-          </div>
-        </div> -->
-        
-    <h3 *ngFor="let item of alluseramount" >
-        
-        @if(username != item.key){
-          ●
-          @if( item.value <0){
-            <span class="text-danger"> Give ₹{{-item.value}} to  {{item.key}}</span> 
-           }
-           @else {
-            <span class="text-success" > Take ₹{{  item.value}} from  {{item.key}}</span> 
-           }
-    
-        }
-     </h3>
-    
-     <h2> Total Expense :  <b class="text-primary">₹{{totalExpense}}</b> </h2>
-     <br>
-     <h3 class="text-center">Select Filter Based On PaidBy</h3>
-     <span class=" my-2 d-flex justify-content-center align-items-center">
-      <div class="input-group d-flex justify-content-center align-items-center">
-          <span class="input-group-text d-flex justify-content-center align-items-center">Search</span>
-          <input type="text" class="form-control" [(ngModel)]="search" name="search" placeholder="Search..." aria-label="Search">
-      </div>
-  </span>
-     <div class="row row-cols-1 row-cols-md-1 ">
-      <div class="col" *ngFor="let item of allExpense | filter:search">
-       @if(item.paidBy != item.paidTo){
-          <div class="card my-2" >
-            <div class="card-body"> 
-              <img 
-              style="width: 100px; height: 100px; cursor: pointer;" 
-              [src]="'data:image/png;base64,' + item.image" 
-              alt="{{item.description}}"
-              data-bs-toggle="modal" 
-              data-bs-target="#imageModal" 
-              (click)="zoomImage(item.image)">
-            
 
-              <h3 class="card-title">{{item.description}}</h3>
-                  @if(item.paidBy == username){
-                    <p class="card-text fs-5   "> {{item.paidBy}} gave <b class="text-success"> ₹{{item.amount}} </b> to {{item.paidTo}}</p>
-                  }
-                  @else{
-                    <p class="card-text fs-5"> {{item.paidBy}} gave <b  class="text-danger" > ₹{{item.amount}} </b> to {{item.paidTo}}</p>
-                  } 
-              <p class="card-text right-side fs-3" style="position: absolute; right: 20px; top:30px;"> {{item.addedWhen | date :  'longDate'}} {{item.addedWhen | date :  'shortTime'}}</p>
+  <!-- User Balances -->
+  <div class="mb-4">
+    <h3 *ngFor="let item of alluseramount" class="mb-2">
+      <ng-container *ngIf="username !== item.key">
+        <span class="me-2">●</span>
+        <span *ngIf="item.value < 0" class="text-danger">
+          Give ₹{{ -item.value }} to {{ item.key }}
+        </span>
+        <span *ngIf="item.value >= 0" class="text-success">
+          Take ₹{{ item.value }} from {{ item.key }}
+        </span>
+      </ng-container>
+    </h3>
+  </div>
+
+  <!-- Total Expense -->
+  <h2 class="mb-4">
+    Total Expense: <span class="text-primary">₹{{ totalExpense }}</span>
+  </h2>
+
+  <!-- Search Filter -->
+  <div class="mb-4">
+    <h4 class="text-center mb-3">Filter Expenses Based on Paid By</h4>
+    <div class="input-group mx-auto" style="max-width: 400px;">
+      <span class="input-group-text" id="search-addon">
+        <i class="bi bi-search"></i> Search
+      </span>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search..."
+        aria-label="Search"
+        aria-describedby="search-addon"
+        [(ngModel)]="search"
+        name="search"
+      />
+    </div>
+  </div>
+
+  <!-- Expense Cards -->
+<div class="row g-4">
+  <div
+    class="col-12 col-sm-6 col-md-4"
+    *ngFor="let item of allExpense | filter:search"
+  >
+    <ng-container  >
+      <div class="card h-100 shadow-sm rounded">
+        <div class="row g-0 align-items-center">
+          <div class="col-4">
+            <img
+              [src]="'data:image/png;base64,' + item.image"
+              alt="{{ item.description }}"
+              class="img-fluid rounded-start"
+              style="object-fit: cover; height: 120px; width: 100%; cursor: pointer;"
+              data-bs-toggle="modal"
+              data-bs-target="#imageModal"
+              (click)="zoomImage(item.image)"
+            />
+          </div>
+          <div class="col-8">
+            <div class="card-body p-3">
+              <h5 class="card-title mb-2 text-truncate" title="{{ item.description }}">
+                {{ item.description }}
+              </h5>
+              <p
+                class="card-text mb-2"
+                [ngClass]="item.paidBy === username ? 'text-success' : 'text-danger'"
+                style="font-weight: 600;"
+              >
+                {{ item.paidBy }} gave ₹{{ item.amount }} to {{ item.paidTo }}
+              </p>
+              <p class="card-text">
+                <small class="text-muted">
+                  {{ item.addedWhen | date: 'mediumDate' }} •
+                  {{ item.addedWhen | date: 'shortTime' }}
+                </small>
+              </p>
             </div>
           </div>
-       }
- 
-      </div> 
-    </div>
-
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
 
 </div>
 
-
-
-<!-- _________________________ -->
- <!-- Image Zoom Modal -->
-<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+<!-- Image Zoom Modal -->
+<div
+  class="modal fade"
+  id="imageModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header bg-primary text-white">
         <h5 class="modal-title">Image Preview</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body text-center">
-        <img [src]="selectedImage" class="img-fluid" style="width: 400px; height: 400px;" alt="Zoomed Image">
+        <img
+          [src]="selectedImage"
+          class="img-fluid rounded"
+          style="max-height: 400px; object-fit: contain;"
+          alt="Zoomed Image"
+        />
       </div>
     </div>
   </div>
 </div>
-
-
-
- 

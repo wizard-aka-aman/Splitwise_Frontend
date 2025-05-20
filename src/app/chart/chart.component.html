@@ -1,14 +1,27 @@
-<h1 class="text-center"> {{groupName}} -  Chart</h1>
-<div class="simple-bar-chart " >
-  
- 
-    <div class="item" style="--clr: #5EB344; --val: {{data.value/TotalExpense*100}}" *ngFor="let data of Data">
-        <div class="label fs-3" >{{data.key}} <br> ₹{{data.value}}</div>
-        <div class="value fw-bold fs-5" >{{data.value/TotalExpense*100  | number :'1.0-0'}}%</div>
-        
+<h1 class="text-center my-4">{{groupName}} - Chart</h1>
+
+<div class="container">
+  <div class="simple-bar-chart d-flex flex-wrap justify-content-center gap-3">
+    <div 
+      class="item d-flex flex-column align-items-center" 
+      *ngFor="let data of Data" 
+      [style.--val]="(data.value / TotalExpense * 100)"
+      style="--clr: #5EB344; flex: 1 1 150px; max-width: 180px; min-width: 120px;"
+    >
+      <div class="label fs-5 text-center mb-2">
+        {{data.key}} <br> ₹{{data.value}}
       </div>
-   
-   
+      <div 
+        class="bar bg-success mb-2" 
+        [style.height.%]="(data.value / TotalExpense * 100)"
+        style="width: 40px; border-radius: 6px;"
+        title="{{data.value/TotalExpense*100 | number:'1.0-0'}}%"
+      ></div>
+      <div class="value fw-bold fs-6 text-center">
+        {{data.value / TotalExpense * 100 | number:'1.0-0'}}%
+      </div>
+    </div>
+  </div>
 </div>
 
 <div *ngIf="isAppear"  style="position: absolute; top: 50vh; left: 50vw;">
